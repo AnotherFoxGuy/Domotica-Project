@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:HelloApp"
+             x:Class="HelloApp.MainPage">
+
+    <StackLayout Margin="16" VerticalOptions="Center">
+
+        <Label Text="Naam" />
+        <Entry x:Name="NameEntry" />
+        <Button x:Name="AddButton" Text="Toevoegen" HorizontalOptions="Center" WidthRequest="128" Clicked="AddButton_OnClicked" />
+        <Button x:Name="ShowButton" Text="Toon lijst" HorizontalOptions="Center" WidthRequest="128" Clicked="ShowButton_OnClicked"/>
+    </StackLayout>
+
+</ContentPage>
