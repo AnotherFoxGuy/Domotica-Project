@@ -6,10 +6,15 @@
 
     <StackLayout Margin="16" VerticalOptions="Center">
 
-        <Label Text="Naam" />
-        <Entry x:Name="NameEntry" />
-        <Button x:Name="AddButton" Text="Toevoegen" HorizontalOptions="Center" WidthRequest="128" Clicked="AddButton_OnClicked" />
-        <Button x:Name="ShowButton" Text="Toon lijst" HorizontalOptions="Center" WidthRequest="128" Clicked="ShowButton_OnClicked"/>
+      <Label x:Name="IsConnected"/>
+
+      <Label Text="Switch" />
+      <Switch x:Name="Switch1" Toggled="Switch1_Toggled"/>
+      <Label Text="Switch 2"/>
+      <Switch x:Name="Switch2" Toggled="Switch2_Toggled"/>
+      <Label Text="Switch 3"/>
+      <Switch x:Name="Switch3" Toggled="Switch3_Toggled"/>
+      
     </StackLayout>
 
 </ContentPage>
