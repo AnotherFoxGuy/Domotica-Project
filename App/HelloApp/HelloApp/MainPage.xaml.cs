@@ -19,13 +19,16 @@ namespace HelloApp
         public MainPage()
         {
             InitializeComponent();
-            var configuration = new MqttConfiguration();
 
-            var kaas = Task.Run(async () => await MqttClient.CreateAsync("vps693792.ovh.net", configuration));
+            var kaas = Task.Run(async () => await MqttClient.CreateAsync("vps693792.ovh.net"));
             kaas.Wait();
             _client = kaas.Result;
 
-            Task.Run(async () => await _client.ConnectAsync(new MqttClientCredentials("Kaas-App", "mqtt-test", "mqtt-test"))).Wait();
+            Task.Run(
+                    async () => await _client.ConnectAsync(
+                        new MqttClientCredentials("Kaas", "mqtt-test", "mqtt-test")
+                        ))
+                .Wait();
         }
 
         private void Switch1_Toggled(object sender, ToggledEventArgs e)
