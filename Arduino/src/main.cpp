@@ -20,7 +20,7 @@ unsigned long lastMillis = 0;
 
 void connect() {
   Serial.print("connecting...");
-  while (!client.connect("Kaas-Knabelaar", "XXXXX", "XXXXX")) {
+  while (!client.connect("Kaas-Knabelaar", "mqtt-test", "mqtt-test")) {
     Serial.print(".");
     delay(1000);
   }
