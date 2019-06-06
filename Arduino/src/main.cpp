@@ -18,7 +18,7 @@
 // Create a transmitter on address 123, using digital pin 11 to transmit, 
 // with a period duration of 260ms (default), repeating the transmitted
 // code 2^3=8 times.
-NewRemoteTransmitter transmitter(31787478, 11, 260, 3);
+NewRemoteTransmitter transmitter(31787478, 2, 260, 3);
 
 // Enter a MAC address for your controller below.
 byte mac[] = {0x90, 0xA2, 0xDA, 0x0E, 0xFE, 0x40};
@@ -62,7 +62,7 @@ int transmitterTurnOnControl(String command) {
 int transmitterTurnOffControl(String command) {
     // Get state from command
     transmitter.sendUnit(command.toInt(), false);
-    return 1;
+    return 0;
 }
 
 void setup(void) {
@@ -105,5 +105,4 @@ void loop() {
     EthernetClient client = server.available();
     rest.handle(client);
     wdt_reset();
-
 }

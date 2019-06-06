@@ -14,11 +14,4 @@
     <PackageReference Include="Xamarin.Forms" Version="3.6.0.344457" />
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Page Include="ListPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator></Generator>
-    </Page>
-  </ItemGroup>
 </Project>

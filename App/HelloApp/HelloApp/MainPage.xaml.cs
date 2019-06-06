@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -13,26 +14,33 @@ namespace HelloApp
     [DesignTimeVisible(true)]
     public partial class MainPage : ContentPage
     {
-        private List<string> _names;
-        
-        
+        HttpClient _client = new HttpClient();
+        private HttpContent _content;
+
         public MainPage()
         {
             InitializeComponent();
-            _names = new List<string>();
         }
 
-
-        private void AddButton_OnClicked(object sender, EventArgs e)
+        public void ToggleSwitch(string ip, string state, int switchNr)
         {
-            if (!string.IsNullOrEmpty(NameEntry.Text))
-                _names.Add(NameEntry.Text);
-
+            Uri uri = new Uri($"http://{ip}/transmitter{state}?params={switchNr}");
+            HttpResponseMessage _ =  _client.PutAsync(uri, _content).Result;
         }
 
-        private void ShowButton_OnClicked(object sender, EventArgs e)
+        private void Switch1_Toggled(object sender, ToggledEventArgs e)
         {
-            Navigation.PushAsync(new ListPage(_names));
+            ToggleSwitch(ipfield.Text, Switch1.IsToggled ? "On" : "Off", 0);
+        }
+
+        private void Switch2_Toggled(object sender, ToggledEventArgs e)
+        {
+            ToggleSwitch(ipfield.Text, Switch2.IsToggled ? "On" : "Off", 1);
+        }
+
+        private void Switch3_Toggled(object sender, ToggledEventArgs e)
+        {
+            ToggleSwitch(ipfield.Text, Switch3.IsToggled ? "On" : "Off", 2);
         }
     }
 }

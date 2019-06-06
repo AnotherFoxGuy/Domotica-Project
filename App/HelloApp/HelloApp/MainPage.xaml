@@ -5,11 +5,22 @@
              x:Class="HelloApp.MainPage">
 
     <StackLayout Margin="16" VerticalOptions="Center">
+        <Label Text="Ip adress"/>
+        <Entry x:Name="ipfield"/>
 
-        <Label Text="Naam" />
-        <Entry x:Name="NameEntry" />
-        <Button x:Name="AddButton" Text="Toevoegen" HorizontalOptions="Center" WidthRequest="128" Clicked="AddButton_OnClicked" />
-        <Button x:Name="ShowButton" Text="Toon lijst" HorizontalOptions="Center" WidthRequest="128" Clicked="ShowButton_OnClicked"/>
+        <Label Text="Toggle Lamps:"/>
+        <StackLayout Orientation="Horizontal">
+            <StackLayout Orientation="Vertical" VerticalOptions="Center">
+                <Label Text="Switch 1" FontSize="Large"/>
+                <Label Text="Switch 2" FontSize="Large"/>
+                <Label Text="Switch 3" FontSize="Large"/>
+            </StackLayout>
+            <StackLayout Orientation="Vertical" VerticalOptions="Center">
+                <Switch x:Name="Switch1" Toggled="Switch1_Toggled"/>
+                <Switch x:Name="Switch2" Toggled="Switch2_Toggled"/>
+                <Switch x:Name="Switch3" Toggled="Switch3_Toggled"/>
+            </StackLayout>
+        </StackLayout>
     </StackLayout>
 
 </ContentPage>
