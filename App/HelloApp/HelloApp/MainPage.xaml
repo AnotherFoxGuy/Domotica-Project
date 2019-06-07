@@ -21,6 +21,13 @@
                 <Switch x:Name="Switch3" Toggled="Switch3_Toggled"/>
             </StackLayout>
         </StackLayout>
+        <StackLayout Orientation="Vertical">
+            <Label x:Name="temp"/>
+            <Label x:Name="humid"/>
+            <Label x:Name="potmeter"/>
+        </StackLayout>
+
+        <Slider x:Name="interval" Maximum="60" Minimum="1" MaximumTrackColor="Black" MinimumTrackColor="OrangeRed" ThumbColor="HotPink"/>
     </StackLayout>
 
 </ContentPage>

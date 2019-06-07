@@ -7,13 +7,22 @@
 */
 
 #define LIGHTWEIGHT 1
+#define DUUR 2000       // (min) x (seconds) x (milliseconds)
 
 // Libraries
 #include <SPI.h>
+#include <dht.h>
 #include <Ethernet.h>
 #include <aREST.h>
 #include <avr/wdt.h>
 #include <NewRemoteTransmitter.h>
+
+// Variables
+uint32_t timer;
+float temperature;
+float humidity;
+int pins[] = {5,6,7};
+DHT dht;
 
 // Create a transmitter on address 123, using digital pin 11 to transmit, 
 // with a period duration of 260ms (default), repeating the transmitted
@@ -32,10 +41,6 @@ EthernetServer server(80);
 // Create aREST instance
 aREST rest = aREST();
 
-// Variables to be exposed to the API
-int temperature;
-int humidity;
-
 // Declare functions to be exposed to the API
 int ledControl(String command);
 
@@ -47,13 +52,13 @@ int ledControl(String command) {
 
     digitalWrite(6, state);
     return 1;
-
 }
 
 // Custom function accessible by the API
 int transmitterTurnOnControl(String command) {
     // Get state from command
     transmitter.sendUnit(command.toInt(), true);
+    digitalWrite(pins[command.toInt()], HIGH);
     return 1;
 }
 
@@ -62,47 +67,57 @@ int transmitterTurnOnControl(String command) {
 int transmitterTurnOffControl(String command) {
     // Get state from command
     transmitter.sendUnit(command.toInt(), false);
-    return 0;
+    digitalWrite(pins[command.toInt()], LOW);
+    return 1;
 }
 
 void setup(void) {
     // Start Serial
     Serial.begin(9600);
 
-    // Init variables and expose them to REST API
-    temperature = 24;
-    humidity = 40;
-    rest.variable("temperature", &temperature);
-    rest.variable("humidity", &humidity);
-
+    // Start humidity and temp sensor
+    dht.setup(8);
+    
     // Function to be exposed
     rest.function("led", ledControl);
     rest.function("transmitterOff", transmitterTurnOnControl);
     rest.function("transmitterOn", transmitterTurnOffControl);
+
+    rest.variable("temperature", &temperature);
+    rest.variable("humidity", &humidity);
 
     // Give name & ID to the device (ID should be 6 characters long)
     rest.set_id("3621");
     rest.set_name("Kaas_Knabelaar");
 
     // Start the Ethernet connection and the server
-    //if (Ethernet.begin(mac) == 0) {
-    // Serial.println("Failed to configure Ethernet using DHCP");
-    // no point in carrying on, so do nothing forevermore:
-    // try to congifure using IP address instead of DHCP:
-    Ethernet.begin(mac, ip);
-    // }
+    //if no dhcp, use default ip
+    if (Ethernet.begin(mac) == 0) {
+      Ethernet.begin(mac, ip);
+    }
     server.begin();
     Serial.print("server is at ");
     Serial.println(Ethernet.localIP());
 
     // Start watchdog
     wdt_enable(WDTO_4S);
+
+    delay(5);
+    timer = millis();
 }
 
 void loop() {
-
     // listen for incoming clients
     EthernetClient client = server.available();
     rest.handle(client);
     wdt_reset();
+
+    // dht sensor
+    if (timer != 0) {
+      if ((millis() - timer) > DUUR ) {
+          temperature = dht.getTemperature();
+          humidity = dht.getHumidity();
+          timer = millis();
+      }
+    }
 }
