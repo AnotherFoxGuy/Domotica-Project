@@ -11,7 +11,7 @@
 
 // Libraries
 #include <SPI.h>
-#include <dht.h>
+#include <DHT.h>
 #include <Ethernet.h>
 #include <aREST.h>
 #include <avr/wdt.h>
