@@ -1,6 +1,7 @@
 pull_request_rules:
   - name: automatic merge on CI success and review
     conditions:
+      - status-success=continuous-integration/appveyor/pr
       - status-success=Travis CI - Pull Request
       - "#approved-reviews-by>=1"
     actions:
