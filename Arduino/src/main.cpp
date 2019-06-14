@@ -10,6 +10,7 @@
 #define DUUR 2000       // (min) x (seconds) x (milliseconds)
 
 // Libraries
+#include <FreqCount.h>
 #include <SPI.h>
 #include <DHT.h>
 #include <Ethernet.h>
