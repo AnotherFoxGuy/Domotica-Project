@@ -7,7 +7,8 @@
              x:Class="Project_Green.MainPage">
 
     <StackLayout>
-        <Button Clicked="Button_Clicked"/>
+        <Button Clicked="Button_Clicked" Text="Test"/>
+        <Label x:Name="IP_Address" Text="here should be an ip address"/>
         <ListView x:Name="GreenhouseList">
             <ListView.ItemTemplate>
                 <DataTemplate>
