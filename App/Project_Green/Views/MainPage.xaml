@@ -7,13 +7,16 @@
              x:Class="Project_Green.MainPage">
 
     <StackLayout>
-        <ListView>
+        <Button Clicked="Button_Clicked"/>
+        <ListView x:Name="GreenhouseList">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Orientation="Horizontal">
-                            <Image/>
-                            <Label/>
+                            <Image Source="{Binding Greenhouse_Image}" WidthRequest="64"/>
+                            <StackLayout>
+                                <Label Text="{Binding Greenhouse_Name}"/>
+                            </StackLayout>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

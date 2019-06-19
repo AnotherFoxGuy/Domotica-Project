@@ -66,6 +66,7 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseService.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,6 +75,7 @@
     <AndroidAsset Include="Assets\FontAwesome_Brands.otf" />
     <AndroidAsset Include="Assets\FontAwesome_Regular.otf" />
     <AndroidAsset Include="Assets\FontAwesome_Solid.otf" />
+    <AndroidAsset Include="Assets\GreenhouseData.db" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
@@ -101,13 +103,17 @@
     <Folder Include="Resources\drawable-xhdpi\" />
     <Folder Include="Resources\drawable-xxhdpi\" />
     <Folder Include="Resources\drawable-xxxhdpi\" />
-    <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Project_Green\Project_Green.csproj">
       <Project>{623A0149-8761-4146-98D4-2E1D3CE2ED3C}</Project>
       <Name>Project_Green</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="..\Project_Green\Images\GreenhouseDefault.png">
+      <Link>Resources\drawable\GreenhouseDefault.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
