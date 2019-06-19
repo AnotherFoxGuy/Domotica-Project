@@ -8,12 +8,15 @@ namespace Project_Green.Models
     public class Greenhouse
     {
         [Unique, PrimaryKey, NotNull]
-        public string ID { get; set; }
+        public int Greenhouse_ID { get; set; }
 
         [Unique]
-        public string Name { get; set; }
+        public string Greenhouse_Name { get; set; }
+
+        [NotNull]
+        public string Greenhouse_Image { get; set; }
 
         [Unique, NotNull]
-        public string IP { get; set; }
+        public string Greenhouse_IP { get; set; }
     }
 }
