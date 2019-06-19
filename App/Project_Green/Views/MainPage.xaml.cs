@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Project_Green.Models;
+using System.Net;
+using System.Text.RegularExpressions;
 
 namespace Project_Green
 {
@@ -15,10 +17,13 @@ namespace Project_Green
     public partial class MainPage : ContentPage
     {
         DatabaseManager databaseManager = new DatabaseManager();
+        IPAddress[] addresses = Dns.GetHostAddresses(Dns.GetHostName());
+        Regex regex = new Regex("^.+(?=\\.\\d+$)");
         public MainPage()
         {
             InitializeComponent();
             GreenhouseList.ItemsSource = databaseManager.GetGreenhouses();
+            IP_Address.Text = regex.Match(addresses[0].ToString()).ToString();
         }
 
         private void Button_Clicked(object sender, EventArgs e)
