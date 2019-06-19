@@ -360,3 +360,5 @@ CMakeListsPrivate.txt
 Arduino/\.vscode/
 
 Arduino/cmake-build-debug/
+
+Test/build/
