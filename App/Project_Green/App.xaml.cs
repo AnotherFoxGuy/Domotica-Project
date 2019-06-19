@@ -1,4 +1,7 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using System.Diagnostics;
+using System.Net.Http;
+using Xamarin.Forms;
 
 namespace Project_Green
 {
@@ -14,6 +17,12 @@ namespace Project_Green
         protected override void OnStart()
         {
             // Handle when your app starts
+            var test = new ArdunoRest.ArdunoRestClient();
+            test.BaseUrl = "192992553";
+
+
+            var res = test.Id();
+            var x = res.Name;
         }
 
         protected override void OnSleep()
