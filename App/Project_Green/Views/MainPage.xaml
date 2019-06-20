@@ -3,13 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              mc:Ignorable="d"
              x:Class="Project_Green.MainPage">
 
     <StackLayout>
-        <Button Clicked="Button_Clicked" Text="Test"/>
-        <Label x:Name="IP_Address" Text="here should be an ip address"/>
+        <Button Clicked="Button_Clicked" Text="Rescan"/>
         <ListView x:Name="GreenhouseList">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -18,13 +16,13 @@
                             <Image Source="{Binding Greenhouse_Image}" WidthRequest="64"/>
                             <StackLayout>
                                 <Label Text="{Binding Greenhouse_Name}"/>
+                                <Label Text="{Binding Greenhouse_IP}"/>
                             </StackLayout>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <microcharts:ChartView x:Name="Testchart" HeightRequest="150"/>
     </StackLayout>
 
 </ContentPage>
