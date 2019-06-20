@@ -9,6 +9,7 @@
 
     <StackLayout>
         <Button Clicked="Button_Clicked" Text="Test"/>
+        <Button Clicked="Button_Clicked_1" Text="Go to ChartPage"/>
         <Label x:Name="IP_Address" Text="here should be an ip address"/>
         <ListView x:Name="GreenhouseList">
             <ListView.ItemTemplate>

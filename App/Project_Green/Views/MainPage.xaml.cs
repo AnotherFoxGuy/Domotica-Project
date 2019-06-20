@@ -10,6 +10,7 @@ using System.Net;
 using System.Text.RegularExpressions;
 using Microcharts;
 using SkiaSharp;
+using Project_Green.Views;
 
 namespace Project_Green
 {
@@ -21,14 +22,14 @@ namespace Project_Green
         DatabaseManager databaseManager = new DatabaseManager();
         IPAddress[] addresses = Dns.GetHostAddresses(Dns.GetHostName());
         Regex regex = new Regex("^.+(?=\\.\\d+$)");
-        List<Microcharts.Entry> entries = new List<Microcharts.Entry>();
+        //List<Microcharts.Entry> entries = new List<Microcharts.Entry>();
         public MainPage()
         {
             InitializeComponent();
             GreenhouseList.ItemsSource = databaseManager.GetGreenhouses();
             IP_Address.Text = regex.Match(addresses[0].ToString()).ToString();
-            AddChartEntries(150, 300, 50);
-            Testchart.Chart = new BarChart() { Entries = entries };
+            //AddChartEntries(150, 300, 50);
+            //Testchart.Chart = new BarChart() { Entries = entries };
         }
 
         private void Button_Clicked(object sender, EventArgs e)
@@ -37,11 +38,16 @@ namespace Project_Green
             GreenhouseList.ItemsSource = databaseManager.GetGreenhouses();
         }
 
-        public void AddChartEntries(float test1, float test2, float test3)
+        //public void AddChartEntries(float test1, float test2, float test3)
+        //{
+        //    entries.Add(new Microcharts.Entry(test1) { Color = SKColor.Parse("#FF1493"), Label = "Test", ValueLabel = test1.ToString() });
+        //    entries.Add(new Microcharts.Entry(test2) { Color = SKColor.Parse("#00BFFF"), Label = "Test", ValueLabel = test2.ToString() });
+        //    entries.Add(new Microcharts.Entry(test3) { Color = SKColor.Parse("#00CED1"), Label = "Test", ValueLabel = test3.ToString() });
+        //}
+
+        private void Button_Clicked_1(object sender, EventArgs e)
         {
-            entries.Add(new Microcharts.Entry(test1) { Color = SKColor.Parse("#FF1493"), Label = "Test", ValueLabel = test1.ToString() });
-            entries.Add(new Microcharts.Entry(test2) { Color = SKColor.Parse("#00BFFF"), Label = "Test", ValueLabel = test2.ToString() });
-            entries.Add(new Microcharts.Entry(test3) { Color = SKColor.Parse("#00CED1"), Label = "Test", ValueLabel = test3.ToString() });
+            Application.Current.MainPage = new ChartPage();
         }
     }
 }
