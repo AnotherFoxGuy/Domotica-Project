@@ -7,7 +7,7 @@
              x:Class="Project_Green.MainPage">
 
     <StackLayout>
-        <Button Clicked="Button_Clicked" Text="Rescan"/>
+        <Button Clicked="Button_Clicked" Text="Scan"/>
         <ListView x:Name="GreenhouseList">
             <ListView.ItemTemplate>
                 <DataTemplate>

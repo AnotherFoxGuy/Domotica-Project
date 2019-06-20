@@ -18,15 +18,17 @@ namespace Project_Green
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
+        IPScanner ipsc;
+
         public MainPage()
         {
             InitializeComponent();
-            GreenhouseList.ItemsSource = new IPScanner().GetGreenhouses();
+            ipsc = new IPScanner();
         }
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            GreenhouseList.ItemsSource = new IPScanner().GetGreenhouses();
+            GreenhouseList.ItemsSource = ipsc.GetGreenhouses();
         }
     }
 }
