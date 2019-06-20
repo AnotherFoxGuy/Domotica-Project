@@ -26,6 +26,7 @@ namespace Project_Green.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::Microcharts.Droid.Resource.String.library_name = global::Project_Green.Droid.Resource.String.library_name;
 			global::Xamarin.Essentials.Resource.Attribute.alpha = global::Project_Green.Droid.Resource.Attribute.alpha;
 			global::Xamarin.Essentials.Resource.Attribute.coordinatorLayoutStyle = global::Project_Green.Droid.Resource.Attribute.coordinatorLayoutStyle;
 			global::Xamarin.Essentials.Resource.Attribute.font = global::Project_Green.Droid.Resource.Attribute.font;
@@ -7790,6 +7791,9 @@ namespace Project_Green.Droid
 			
 			// aapt resource value: 0x7f0b0046
 			public const int hide_bottom_view_on_scroll_behavior = 2131427398;
+			
+			// aapt resource value: 0x7f0b004e
+			public const int library_name = 2131427406;
 			
 			// aapt resource value: 0x7f0b0000
 			public const int mr_button_content_description = 2131427328;

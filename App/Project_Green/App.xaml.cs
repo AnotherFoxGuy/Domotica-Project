@@ -17,12 +17,12 @@ namespace Project_Green
         protected override void OnStart()
         {
             // Handle when your app starts
-            var test = new ArdunoRest.ArdunoRestClient();
-            test.BaseUrl = "192992553";
+            //var test = new ArdunoRest.ArdunoRestClient();
+            //test.BaseUrl = "192992553";
 
 
-            var res = test.Id();
-            var x = res.Name;
+            //var res = test.Id();
+            //var x = res.Name;
         }
 
         protected override void OnSleep()
