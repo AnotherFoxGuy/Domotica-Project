@@ -31,7 +31,7 @@ DHT dht;
 NewRemoteTransmitter transmitter(31787478, 2, 260, 3);
 
 // Enter a MAC address for your controller below.
-byte mac[] = {0x90, 0xA2, 0xDA, 0x0E, 0xFE, 0x40};
+byte mac[] = {0x90, 0xA2, 0xDA, 0xFE, 0x0E, 0x40};
 
 // IP address in case DHCP fails
 IPAddress ip(192, 168, 1, 3);
@@ -88,8 +88,8 @@ void setup(void) {
     rest.variable("humidity", &humidity);
 
     // Give name & ID to the device (ID should be 6 characters long)
-    rest.set_id("3621");
-    rest.set_name("Kaas_Knabelaar");
+    rest.set_id("1234");
+    rest.set_name("Bloemkool_BoilerV3");
 
     // Start the Ethernet connection and the server
     //if no dhcp, use default ip
