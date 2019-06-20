@@ -10,6 +10,7 @@ using System.Net;
 using System.Text.RegularExpressions;
 using Microcharts;
 using SkiaSharp;
+using Project_Green.Views;
 
 namespace Project_Green
 {
