@@ -8,6 +8,7 @@
 
     <StackLayout>
         <Button Clicked="Button_Clicked" Text="Scan"/>
+        <Button Clicked="Button_Clicked_1" Text="Ga naar Chart page "/>
         <ListView x:Name="GreenhouseList">
             <ListView.ItemTemplate>
                 <DataTemplate>

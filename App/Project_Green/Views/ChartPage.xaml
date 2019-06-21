@@ -6,15 +6,23 @@
              xmlns:Microchart="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              mc:Ignorable="d"
              x:Class="Project_Green.Views.ChartPage">
+
     <StackLayout>
 
         <StackLayout>
-            <Label x:Name="Test"/>
-            <Picker x:Name="DateSelecter" Title="Datum selectie" />
+            <Label Text="Charts" FontSize="Large"/>
+            <Picker x:Name="DateSelecter" Title="Datum selectie" SelectedIndexChanged="DateChanged" />
         </StackLayout>
-            <Microchart:ChartView x:Name="HumidityChart" HeightRequest="250"/>
-            <Microchart:ChartView x:Name="TempratureChart" HeightRequest="250"/>
-            <Microchart:ChartView x:Name="MoisterChart" HeightRequest="250"/>
+        <ScrollView>
+            <StackLayout>
+                <Label Text="Humidity" FontSize="Medium"/>
+                <Microchart:ChartView x:Name="HumidityChart" HeightRequest="250"/>
+                <Label Text="Temprature" FontSize="Medium"/>
+                <Microchart:ChartView x:Name="TempratureChart" HeightRequest="250"/>
+                <Label Text="Soil Moister" FontSize="Medium"/>
+                <Microchart:ChartView x:Name="MoisterChart" HeightRequest="250"/>
+            </StackLayout>
+        </ScrollView>
     </StackLayout>
     
 </ContentPage>
