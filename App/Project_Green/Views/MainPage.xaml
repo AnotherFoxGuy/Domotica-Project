@@ -4,8 +4,12 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Project_Green.MainPage">
-
+             x:Class="Project_Green.MainPage"
+             Title="Home"
+             NavigationPage.HasBackButton="False">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem  Name="Scan" Order="Primary" Icon="/Images/sync.png" Text="Scan" Priority="0" Clicked="Button_Clicked"/>
+    </ContentPage.ToolbarItems>
     <StackLayout>
         <Button Clicked="Button_Clicked" Text="Scan"/>
         <Button Clicked="Button_Clicked_1" Text="Ga naar Chart page "/>

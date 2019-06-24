@@ -46,6 +46,7 @@ namespace Project_Green
         public int EntryCount(string dateselected)
         {
             Dictionary<string, int> TimeDates = new Dictionary<string, int>();
+            TimeDates.Add("", 7);
             TimeDates.Add("Week", 7);
             TimeDates.Add("Month", 12);
             TimeDates.Add("Year", 24);

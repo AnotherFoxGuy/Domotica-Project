@@ -121,5 +121,20 @@
       <Link>Resources\drawable\GreenhouseDefault.png</Link>
     </AndroidResource>
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="..\Project_Green\Images\cogs.png">
+      <Link>Resources\drawable\cogs.png</Link>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="..\Project_Green\Images\home.png">
+      <Link>Resources\drawable\home.png</Link>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="..\Project_Green\Images\sync.png">
+      <Link>Resources\drawable\sync.png</Link>
+    </AndroidResource>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
