@@ -12,23 +12,33 @@
 // Libraries
 #include <FreqCount.h>
 #include <SPI.h>
+#include <SD.h>
+#include <Wire.h>
+#include <RTClib.h>
 #include <DHT.h>
 #include <Ethernet.h>
 #include <aREST.h>
 #include <avr/wdt.h>
-#include <NewRemoteTransmitter.h>
+
+RTC_DS1307 RTC;
 
 // Variables
 uint32_t timer;
 float temperature;
 float humidity;
-int pins[] = {5,6,7};
+int pins[] = {5, 6, 7};
 DHT dht;
 
-// Create a transmitter on address 123, using digital pin 11 to transmit, 
-// with a period duration of 260ms (default), repeating the transmitted
-// code 2^3=8 times.
-NewRemoteTransmitter transmitter(31787478, 2, 260, 3);
+// set up variables using the SD utility library functions:
+Sd2Card card;
+SdVolume volume;
+SdFile root;
+
+// change this to match your SD shield or module;
+// Arduino Ethernet shield: pin 4
+// Adafruit SD shields and modules: pin 10
+// Sparkfun SD shield: pin 8
+const int chipSelect = 4;
 
 // Enter a MAC address for your controller below.
 byte mac[] = {0x90, 0xA2, 0xDA, 0xFE, 0x0E, 0x40};
@@ -42,11 +52,8 @@ EthernetServer server(80);
 // Create aREST instance
 aREST rest = aREST();
 
-// Declare functions to be exposed to the API
-int ledControl(String command);
-
 // Custom function accessible by the API
-int ledControl(String command) {
+int ledControl(const String& command) {
 
     // Get state from command
     int state = command.toInt();
@@ -55,21 +62,11 @@ int ledControl(String command) {
     return 1;
 }
 
-// Custom function accessible by the API
-int transmitterTurnOnControl(String command) {
-    // Get state from command
-    transmitter.sendUnit(command.toInt(), true);
-    digitalWrite(pins[command.toInt()], HIGH);
-    return 1;
-}
 
+void showDate(const char *txt, const DateTime &dt) {
+    Serial.print(dt.unixtime());
 
-// Custom function accessible by the API
-int transmitterTurnOffControl(String command) {
-    // Get state from command
-    transmitter.sendUnit(command.toInt(), false);
-    digitalWrite(pins[command.toInt()], LOW);
-    return 1;
+    Serial.println();
 }
 
 void setup(void) {
@@ -78,27 +75,47 @@ void setup(void) {
 
     // Start humidity and temp sensor
     dht.setup(8);
-    
-    // Function to be exposed
-    rest.function("led", ledControl);
-    rest.function("transmitterOff", transmitterTurnOnControl);
-    rest.function("transmitterOn", transmitterTurnOffControl);
+    // On the Ethernet Shield, CS is pin 4. It's set as an output by default.
+    // Note that even if it's not used as the CS pin, the hardware SS pin
+    // (10 on most Arduino boards, 53 on the Mega) must be left as an output
+    // or the SD library functions will not work.
+    pinMode(SS, OUTPUT);
 
-    rest.variable("temperature", &temperature);
-    rest.variable("humidity", &humidity);
+
+    // we'll use the initialization code from the utility libraries
+    // since we're just testing if the card is working!
+    while (!card.init(SPI_HALF_SPEED, chipSelect)) {
+        char sdm[7] = "sd i f";
+        Serial.println(sdm);
+    }
+
+    DateTime dt0(0, 1, 1, 0, 0, 0);
+    char d[4] = "dt0";
+    showDate(d, dt0);
+
+    // Function to be exposed
+    char l[4] = "led";
+    rest.function(l, reinterpret_cast<int (*)(String)>(&ledControl));
+    char t[12] = "temperature";
+    rest.variable(t, &temperature);
+    char h[9] = "humidity";
+    rest.variable(h, &humidity);
 
     // Give name & ID to the device (ID should be 6 characters long)
-    rest.set_id("1234");
-    rest.set_name("Bloemkool_BoilerV3");
+    char message[19] = "Bloemkool_BoilerV3";
+    rest.set_name(message);
+    char did[5] = "1551";
+    rest.set_id(did);
 
     // Start the Ethernet connection and the server
     //if no dhcp, use default ip
-    if (Ethernet.begin(mac) == 0) {
-      Ethernet.begin(mac, ip);
+    if (EthernetClass::begin(mac) == 0) {
+        EthernetClass::begin(mac, ip);
     }
     server.begin();
-    Serial.print("server is at ");
-    Serial.println(Ethernet.localIP());
+    char sm[14] = "server is at ";
+    Serial.print(sm);
+    Serial.println(EthernetClass::localIP());
 
     // Start watchdog
     wdt_enable(WDTO_4S);
@@ -115,10 +132,10 @@ void loop() {
 
     // dht sensor
     if (timer != 0) {
-      if ((millis() - timer) > DUUR ) {
-          temperature = dht.getTemperature();
-          humidity = dht.getHumidity();
-          timer = millis();
-      }
+        if ((millis() - timer) > DUUR) {
+            temperature = dht.getTemperature();
+            humidity = dht.getHumidity();
+            timer = millis();
+        }
     }
 }
