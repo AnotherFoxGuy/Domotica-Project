@@ -12,6 +12,7 @@
 
 // headers
 #include "DHT_imp.h"
+#include "DataStorage.h"
 #include "REST_Endpoints.h"
 
 RTC_DS1307 RTC;
@@ -54,6 +55,7 @@ void setup() {
     Serial.println(EthernetClass::localIP());
 
     DHTsetup(&rest);
+    DataStorageSetup();
 
     // Start watchdog
     wdt_enable(WDTO_4S);
@@ -67,6 +69,6 @@ void loop() {
     rest.handle(client);
     wdt_reset();
 
-    auto uu = millis();
     DHTloop();
+    DataStorageloop();
 }
