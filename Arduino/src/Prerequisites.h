@@ -1,6 +1,6 @@
 #pragma once
 
-#define LIGHTWEIGHT 1
+//#define LIGHTWEIGHT 1
 
 #include <Arduino.h>
 #include <FreqCount.h>
@@ -12,3 +12,4 @@
 #include <Ethernet.h>
 #include <aREST.h>
 #include <avr/wdt.h>
+#include <SD.h>
