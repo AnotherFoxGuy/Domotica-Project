@@ -22,6 +22,17 @@ void DataStorageloop()
   auto GroundSensor = analogRead(1);
   auto WaterSensor = analogRead(2);
 
+  /*
+  String sensorData = "{" + 
+    "timestamp : " + showCurrentTime() + ", " 
+    "temperature : " + String(REST_Temperature) + ", " 
+    "humidity : " + String(REST_Humidity) + ", " 
+    "lightlevel : " +String(LightSensor) + ", " 
+    "moisture : " + String(GroundSensor) + ", " 
+    "waterlevel : " + String(WaterSensor)
+  + "}";
+  */
+
   String sensorData = String(REST_Temperature) + ", " + String(REST_Humidity) + ", " + String(LightSensor) + ", " + String(GroundSensor) + ", " + String(WaterSensor);
   writeData2SD(sensorData);
 }
@@ -61,15 +72,5 @@ void readData2SD()
     }
     // close the file:
     sensorDB.close();
-  }
-  else
-  {
-    // close the file:
-    sensorDB.close();
-  }
-  else
-  {
-    // if the file didn't open, print an error:
-    Serial.println("error opening test.txt");
   }
 }
