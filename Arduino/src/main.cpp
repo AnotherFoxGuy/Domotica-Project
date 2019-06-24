@@ -41,7 +41,7 @@ SdFile root;
 const int chipSelect = 4;
 
 // Enter a MAC address for your controller below.
-byte mac[] = {0x90, 0xA2, 0xDA, 0xFE, 0x0E, 0x40};
+byte mac[] = {0x70, 0xA2, 0xDC, 0xFE, 0x0E, 0x40};
 
 // IP address in case DHCP fails
 IPAddress ip(192, 168, 1, 3);

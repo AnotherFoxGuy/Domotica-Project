@@ -31,5 +31,10 @@ namespace Project_Green
         {
             GreenhouseList.ItemsSource = ipsc.GetGreenhouses();
         }
+
+        private void Button_Clicked_1(object sender, EventArgs e)
+        {
+            Application.Current.MainPage = new ChartPage();
+        }
     }
 }
