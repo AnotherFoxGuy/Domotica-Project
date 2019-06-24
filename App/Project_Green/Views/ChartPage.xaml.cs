@@ -23,6 +23,8 @@ namespace Project_Green.Views
             List<string> dates = new List<string> { "Week", "Month", "Year" };
             DateSelecter.ItemsSource = dates;
             fillCharts();
+          
+         
         }
         public void fillCharts()
         {
@@ -35,6 +37,16 @@ namespace Project_Green.Views
         private void DateChanged(object sender, EventArgs e)
         {
             fillCharts();
+        }
+
+        private async void Settings_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SettingsPage());
+        }
+
+        private async void Home_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
         }
     }
 }

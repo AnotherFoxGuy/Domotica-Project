@@ -5,12 +5,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:Microchart="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              mc:Ignorable="d"
-             x:Class="Project_Green.Views.ChartPage">
-
+             x:Class="Project_Green.Views.ChartPage"
+             Title="Charts"
+             NavigationPage.HasBackButton="False">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem  Name="Home" Order="Primary" Icon="/Images/home.png" Text="Home" Priority="0" Clicked="Home_Clicked"/>
+        <ToolbarItem Name="Settings" Order="Primary" Icon="/Images/cogs.png" Text="Settings" Priority="1" Clicked="Settings_Clicked"/>
+    </ContentPage.ToolbarItems>
     <StackLayout>
-
         <StackLayout>
-            <Label Text="Charts" FontSize="Large"/>
+            <Label Text="Pick a timetable" FontSize="Medium"/>
             <Picker x:Name="DateSelecter" Title="Datum selectie" SelectedIndexChanged="DateChanged" />
         </StackLayout>
         <ScrollView>

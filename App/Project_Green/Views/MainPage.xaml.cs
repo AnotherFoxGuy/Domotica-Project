@@ -25,6 +25,8 @@ namespace Project_Green
         {
             InitializeComponent();
             ipsc = new IPScanner();
+            NavigationPage.SetHasNavigationBar(this, true);
+
         }
 
         private void Button_Clicked(object sender, EventArgs e)
@@ -32,9 +34,9 @@ namespace Project_Green
             GreenhouseList.ItemsSource = ipsc.GetGreenhouses();
         }
 
-        private void Button_Clicked_1(object sender, EventArgs e)
+        private async void Button_Clicked_1(object sender, EventArgs e)
         {
-            Application.Current.MainPage = new ChartPage();
+            await Navigation.PushAsync( new ChartPage());
         }
     }
 }
