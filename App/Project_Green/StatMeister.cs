@@ -23,56 +23,20 @@ namespace Project_Green
             long convertedvalue = convert(value,max,min);
             
             Dictionary<long, string> TimeDates = new Dictionary<long, string>();
-            TimeDates.Add(0, "#FF1493");
-            TimeDates.Add(1, "#FF1493");
-            TimeDates.Add(2, "#FF1493");
-            TimeDates.Add(3, "#FF1493");
-            TimeDates.Add(4, "#FF1493");
-            TimeDates.Add(5, "#FF1493");
-            TimeDates.Add(6, "#FF1493");
-            TimeDates.Add(7, "#FF1493");
-            TimeDates.Add(8, "#FF1493");
-            TimeDates.Add(9, "#FF1493");
-            TimeDates.Add(10, "#FF1493");
-            switch (convertedvalue)
-            {
-                case 0:
-                    color = TimeDates[convertedvalue];
-                    break;
-                case 1:
-                    color = TimeDates[convertedvalue];
-                    break;
-                case 2:
-                    color = TimeDates[convertedvalue];
-                    break;
-                case 3:
-                    color = TimeDates[convertedvalue];
-                    break;
-                case 4:
-                    color = TimeDates[convertedvalue];
-                    break;
-                case 5:
-                    color = TimeDates[convertedvalue];
-                    break;
-                case 6:
-                    color = TimeDates[convertedvalue];
-                    break;
-                case 7:
-                    color = TimeDates[convertedvalue];
-                    break;
-                case 8:
-                    color = TimeDates[convertedvalue];
-                    break;
-                case 9:
-                    color = TimeDates[convertedvalue];
-                    break;
-                case 10:
-                    color = TimeDates[convertedvalue];
-                    break;
+            TimeDates.Add(0, "#ed401a");
+            TimeDates.Add(1, "#d85c41");
+            TimeDates.Add(2, "#5bdc54");
+            TimeDates.Add(3, "#ba7c7c");
+            TimeDates.Add(4, "#44c438");
+            TimeDates.Add(5, "#27e016");
+            TimeDates.Add(6, "#44c438");
+            TimeDates.Add(7, "#5bdc54");
+            TimeDates.Add(8, "#d17864");
+            TimeDates.Add(9, "#d85c41");
+            TimeDates.Add(10, "#ed401a");
+            return color = TimeDates[convertedvalue];
 
-            }
-
-            return color;
+          
         }
 
         public long convert (int value,int max ,int min)
@@ -86,22 +50,7 @@ namespace Project_Green
             TimeDates.Add("Month", 12);
             TimeDates.Add("Year", 24);
 
-            switch (dateselected)
-            {
-                case "Week":
-                    AmountOfTimes = TimeDates["Week"];
-                    break;
-                case "Month":
-                    AmountOfTimes = TimeDates["Month"];
-                    break;
-                case "Year":
-                    AmountOfTimes = TimeDates["Year"];
-                    break;
-                default:
-                    AmountOfTimes = TimeDates["Week"];
-                    break;
-            }
-            return AmountOfTimes;
+            return AmountOfTimes = TimeDates[dateselected]; ;
         }
 
         public LineChart MakeLineChart(int dateselecter)
@@ -126,7 +75,7 @@ namespace Project_Green
                     break;
 
             }
-      
+            // dummydata 
             foreach (int value in dates)
             {
                 int i = Limitcheck(100, 0, value);
@@ -195,9 +144,10 @@ namespace Project_Green
         {
             LineChart chart;
             List<ChartEntry> entriesS = new List<ChartEntry>();
-            List<int> Week = new List<int> { 20, 33, 40, 50, 60, 70, 8 };
-            List<int> Month = new List<int> { 20, 33, 40, 50, 60, 70, 8, 20, 33, 40, 50, 60 };
-            List<int> Year = new List<int> { 20, 33, 40, 50, 60, 70, 8, 20, 33, 40, 50, 60 , 20, 33, 40, 50, 60, 70, 8, 20, 33, 40, 50, 60 };
+            // dummydata 
+            List<int> Week = new List<int> { 100, 120, 90, 50, 60, 70, 150 };
+            List<int> Month = new List<int> { 100, 120, 90, 50, 60, 70, 150 , 180, 80, 100 , 150,50};
+            List<int> Year = new List<int> { 100, 120, 90, 50, 60, 70, 150, 180, 80, 100, 150, 50, 100, 120, 90, 50, 60, 70, 150, 180, 80, 100, 150, 50 };
             List<int> dates = new List<int>();
 
             switch (dateselecter)
@@ -213,6 +163,7 @@ namespace Project_Green
                     break;
 
             }
+            // dummydata 
             foreach (var value in dates)
             {
 
