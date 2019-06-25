@@ -6,9 +6,9 @@
   Written in 2014 by Marco Schwartz under a GPL license.
 */
 
-
 // Libraries
 #include "Prerequisites.h"
+#include "Ticker.h"
 
 // headers
 #include "DHT_imp.h"
@@ -32,7 +32,11 @@ EthernetServer server(80);
 // Create aREST instance
 aREST rest = aREST();
 
-void setup() {
+Ticker DHTTimer(DHTloop, 2000);
+Ticker DataStorageTimer(DataStorageloop, 300000, 0, MILLIS);
+
+void setup()
+{
     // Start Serial
     Serial.begin(9600);
 
@@ -41,21 +45,26 @@ void setup() {
     // Give name & ID to the device (ID should be 6 characters long)
     char message[19] = "Bloemkool_BoilerV3";
     rest.set_name(message);
-    char did[5] = "1551";
+    char did[5] = "621";
     rest.set_id(did);
 
     // Start the Ethernet connection and the server
     //if no dhcp, use default ip
-    if (EthernetClass::begin(mac) == 0) {
+    if (EthernetClass::begin(mac) == 0)
+    {
         EthernetClass::begin(mac, ip);
     }
+
     server.begin();
     char sm[14] = "server is at ";
     Serial.print(sm);
     Serial.println(EthernetClass::localIP());
 
     DHTsetup(&rest);
+    DHTTimer.start();
+
     DataStorageSetup();
+    DataStorageTimer.start();
 
     // Start watchdog
     wdt_enable(WDTO_4S);
@@ -63,12 +72,13 @@ void setup() {
     delay(5);
 }
 
-void loop() {
+void loop()
+{
     // listen for incoming clients
     auto client = server.available();
     rest.handle(client);
     wdt_reset();
 
-    DHTloop();
-    DataStorageloop();
+    DHTTimer.update();
+    DataStorageTimer.update();
 }

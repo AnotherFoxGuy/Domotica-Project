@@ -3,7 +3,6 @@
 #include "DateTime.h"
 
 File sensorDB;
-
 void DataStorageSetup()
 {
   Serial.begin(9600);
@@ -22,19 +21,17 @@ void DataStorageloop()
   auto GroundSensor = analogRead(1);
   auto WaterSensor = analogRead(2);
 
-  /*
-  String sensorData = "{" + 
-    "timestamp : " + showCurrentTime() + ", " 
-    "temperature : " + String(REST_Temperature) + ", " 
-    "humidity : " + String(REST_Humidity) + ", " 
-    "lightlevel : " +String(LightSensor) + ", " 
-    "moisture : " + String(GroundSensor) + ", " 
-    "waterlevel : " + String(WaterSensor)
-  + "}";
-  */
-
-  String sensorData = String(REST_Temperature) + ", " + String(REST_Humidity) + ", " + String(LightSensor) + ", " + String(GroundSensor) + ", " + String(WaterSensor);
-  writeData2SD(sensorData);
+  char buffer[150];
+  const char dataf[118] = "{ \"timestamp\": \"%s\", \"temperature\": \"%f\", \"humidity\": \"%f\", \"lightlevel\": \"%i\", \"moisture\": \"%i\", \"waterlevel\": \"%i\"}";
+  int stat = sprintf(buffer, dataf, GetCurrentTime().c_str(), REST_Temperature, REST_Humidity, LightSensor, GroundSensor, WaterSensor);
+  if (stat > 0)
+  {
+    writeData2SD(buffer);
+  }
+  else
+  {
+    Serial.print("Error at sprintf 25 DataStorageloop");
+  }
 }
 
 void writeData2SD(String Data)
@@ -58,7 +55,7 @@ void writeData2SD(String Data)
 
 void readData2SD()
 {
-  String fileName = showCurrentDate();
+  String fileName = GetCurrentDate();
   fileName += ".txt";
   sensorDB = SD.open(fileName.c_str());
   if (sensorDB)
