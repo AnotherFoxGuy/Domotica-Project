@@ -13,20 +13,14 @@ namespace Project_Green.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingsPage : ContentPage
     {
-        DatabaseManager Henk = new DatabaseManager();
-        SettingsMeister Hans = new SettingsMeister();
-
         public SettingsPage()
-        {
-           
+        {    
             InitializeComponent();
-            List<string> Imagesindexes = new List<string> { "Image 1", "Image 2", "Image 3", "Image 4", "Image 5" };
-            Hans.imageselector();
+            List<string> Imagesindexes = new List<string> { "GreenhouseDefault", "GreenHouse1", "GreenHouse2", "GreenHouse3", "GreenHouse4" , "GreenHouse5" };
             ImagePicker.ItemsSource = Imagesindexes;
             ImagePicker.SelectedItem = "Default";
             Imagedisplay.Source = "/Images/GreenhouseDefault.png";
             //pak image van database van deze arduino 
-
         }
 
         private void GotoGraphsPage(object sender, EventArgs e)
@@ -37,12 +31,13 @@ namespace Project_Green.Views
 
         private void Humidity_ValueChanged(object sender, ValueChangedEventArgs e)
         {
-            HumidityLable.Text = "Auto Watering : "  + Convert.ToSingle(HumiditySlider.Value).ToString();
+            HumidityLable.Text = $"Auto Watering : { Convert.ToSingle(HumiditySlider.Value).ToString()}";
         }
+
         private void TempratureSlider_ValueChanged(object sender, ValueChangedEventArgs e)
         {
 
-            TempratureLable.Text = "Trigger fans on Temprature : " + Convert.ToSingle(TempratureSlider.Value).ToString();
+            TempratureLable.Text = $"Trigger fans on Temprature : {Convert.ToSingle(TempratureSlider.Value).ToString()} ";
         }
 
         private void Watering_Toggled(object sender, ToggledEventArgs e)
@@ -57,8 +52,7 @@ namespace Project_Green.Views
 
         private void ImagePicker_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Imagedisplay.Source = Hans.imagesource(ImagePicker.SelectedIndex);
-            
+            Imagedisplay.Source = $"/Images/{ImagePicker.SelectedItem}.png";
         }
     }
 }
