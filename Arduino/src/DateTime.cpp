@@ -64,6 +64,6 @@ String GetCurrentTime()
 
   DateTime dt = __RTC.now();
   char buff[100];
-  sprintf(buff, "%s:%s", dt.hour(), dt.minute());
+  sprintf(buff, "%s-%s", dt.hour(), dt.minute());
   return buff;
 }
