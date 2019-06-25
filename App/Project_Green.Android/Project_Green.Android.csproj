@@ -136,5 +136,30 @@
       <Link>Resources\drawable\sync.png</Link>
     </AndroidResource>
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="..\Project_Green\Images\GreenHouse1.png">
+      <Link>Resources\drawable\GreenHouse1.png</Link>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="..\Project_Green\Images\GreenHouse3.png">
+      <Link>Resources\drawable\GreenHouse3.png</Link>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="..\Project_Green\Images\GreenHouse4.png">
+      <Link>Resources\drawable\GreenHouse4.png</Link>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="..\Project_Green\Images\GreenHouse2.png">
+      <Link>Resources\drawable\GreenHouse2.png</Link>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="..\Project_Green\Images\GreenHouse5.png">
+      <Link>Resources\drawable\GreenHouse5.png</Link>
+    </AndroidResource>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

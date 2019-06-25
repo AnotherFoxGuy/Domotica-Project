@@ -23,5 +23,9 @@ namespace Project_Green
         {
             Connection.Insert(new Greenhouse { Greenhouse_ID = ID, Greenhouse_Name = Name, Greenhouse_Image = Image, Greenhouse_IP = IP });
         }
+        // methode voor data per uur *GetPerHour
+        // methode pak data per dag (met de methode GetPerHour) * PerDay
+        // methode pak per week (met de methode Perday * 7) 
+        // methode pak per maand
     }
 }

@@ -17,5 +17,7 @@
             <Label Text="Fans :" FontSize="Medium"/>
             <Switch  x:Name="Fans" Toggled="Fans_Toggled" />
         </StackLayout>
+        <Picker x:Name="ImagePicker" Title="Select a image" SelectedIndexChanged="ImagePicker_SelectedIndexChanged"/>
+        <Image x:Name="Imagedisplay" Source="/Images/GreenHouseDefault.png" HeightRequest="150"/>
     </StackLayout>
 </ContentPage>
