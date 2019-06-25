@@ -5,12 +5,12 @@ using Xamarin.Forms;
 
 namespace Project_Green
 {
+    
     public partial class App : Application
     {
         public App()
         {
-            InitializeComponent();
-
+            InitializeComponent();        
             MainPage = new NavigationPage(new MainPage());
         }
 

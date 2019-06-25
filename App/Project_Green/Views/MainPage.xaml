@@ -11,7 +11,6 @@
         <ToolbarItem  Name="Scan" Order="Primary" Icon="/Images/sync.png" Text="Scan" Priority="0" Clicked="Button_Clicked"/>
     </ContentPage.ToolbarItems>
     <StackLayout>
-        <Button Clicked="Button_Clicked" Text="Scan"/>
         <Button Clicked="Button_Clicked_1" Text="Ga naar Chart page "/>
         <ListView x:Name="GreenhouseList">
             <ListView.ItemTemplate>
