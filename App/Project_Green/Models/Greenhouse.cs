@@ -16,7 +16,6 @@ namespace Project_Green.Models
         [NotNull]
         public string Greenhouse_Image { get; set; }
 
-        [Unique, NotNull]
         public string Greenhouse_IP { get; set; }
     }
 }

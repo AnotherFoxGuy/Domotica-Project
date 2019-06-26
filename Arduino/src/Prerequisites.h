@@ -3,7 +3,6 @@
 //#define LIGHTWEIGHT 1
 
 #include <Arduino.h>
-#include <ArduinoJson.h>
 #include <FreqCount.h>
 #include <SPI.h>
 #include <SD.h>

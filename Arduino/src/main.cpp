@@ -50,7 +50,7 @@ void setup()
     // Give name & ID to the device (ID should be 6 characters long)
     char message[19] = "Bloemkool_BoilerV3";
     rest.set_name(message);
-    char did[5] = "621";
+    char did[6] = "62153";
     rest.set_id(did);
 
     // Start the Ethernet connection and the server

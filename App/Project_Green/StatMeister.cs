@@ -51,7 +51,7 @@ namespace Project_Green
             TimeDates.Add("Month", 12);
             TimeDates.Add("Year", 24);
 
-            return AmountOfTimes = TimeDates[dateselected]; ;
+            return AmountOfTimes = TimeDates[dateselected];
         }
 
         public LineChart MakeLineChart(int dateselecter)

@@ -13,15 +13,12 @@ namespace Project_Green.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingsPage : ContentPage
     {
-        DatabaseManager pieter = new DatabaseManager();
-
-        public SettingsPage()
+        public SettingsPage(Greenhouse greenhouse)
         {    
             InitializeComponent();
-            List<string> Imagesindexes = new List<string> { "GreenhouseDefault", "GreenHouse1", "GreenHouse2", "GreenHouse3", "GreenHouse4" , "GreenHouse5" };
-            ImagePicker.ItemsSource = Imagesindexes;
+            ImagePicker.ItemsSource = new List<string> { "GreenhouseDefault", "GreenHouse1", "GreenHouse2", "GreenHouse3", "GreenHouse4", "GreenHouse5" };
+            Imagedisplay.Source = greenhouse.Greenhouse_Image;
             ImagePicker.SelectedItem = "GreenhouseDefault";
-            Imagedisplay.Source = "/Images/GreenhouseDefault.png";
             //pak image van database van deze arduino 
         }
 

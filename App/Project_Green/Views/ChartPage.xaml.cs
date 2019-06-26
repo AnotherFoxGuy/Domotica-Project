@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Project_Green.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,22 +14,19 @@ namespace Project_Green.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ChartPage : ContentPage
     {
-        
         StatMeister pieter = new StatMeister();
-        public ChartPage()
+        Greenhouse selectedGreenhouse;
+        public ChartPage(Greenhouse greenhouse)
         {
-
             InitializeComponent();
-            List<string> dates = new List<string> { "Week", "Month", "Year" };
-            DateSelecter.ItemsSource = dates;
+            selectedGreenhouse = greenhouse;
+            DateSelecter.ItemsSource = new List<string> { "Week", "Month", "Year" };
             fillCharts();
-
-          
-         
         }
+
         public void fillCharts()
         {
-            int dateselecter = pieter.EntryCount(Convert.ToString(DateSelecter.SelectedItem));
+            int dateselecter = pieter.EntryCount((string)DateSelecter.SelectedItem);
             HumidityChart.Chart = pieter.MakeLineChart(dateselecter);
             TempratureChart.Chart = pieter.FillTempratureChart(dateselecter);
             MoisterChart.Chart = pieter.FillSoilMoisterChart(dateselecter);
@@ -42,7 +39,7 @@ namespace Project_Green.Views
 
         private async void Settings_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SettingsPage());
+            await Navigation.PushAsync(new SettingsPage(selectedGreenhouse));
         }
 
         private async void Home_Clicked(object sender, EventArgs e)

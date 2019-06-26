@@ -36,9 +36,10 @@ namespace Project_Green
             GreenhouseList.ItemsSource = ipsc.GetGreenhouses();
         }
 
-        private async void Button_Clicked_1(object sender, EventArgs e)
+        private async Task GreenhouseList_ItemSelectedAsync(object sender, SelectedItemChangedEventArgs e)
         {
-            await Navigation.PushAsync( new ChartPage());
+            var SelectedGreenhouse = e.SelectedItem as Greenhouse;
+            await Navigation.PushAsync(new ChartPage(SelectedGreenhouse));
         }
 
         protected override void OnAppearing()

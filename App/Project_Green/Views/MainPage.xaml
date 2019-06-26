@@ -12,7 +12,7 @@
     </ContentPage.ToolbarItems>
     <StackLayout>
         <Button Clicked="Button_Clicked_1" Text="Ga naar Chart page "/>
-        <ListView x:Name="GreenhouseList">
+        <ListView x:Name="GreenhouseList" ItemSelected="GreenhouseList_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
