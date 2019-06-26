@@ -83,8 +83,7 @@ namespace Project_Green
                 string color = ColorRep(value, 100, 0);
                 entriesH.Add(new ChartEntry(i) { Color = SKColor.Parse(color), Label = dateselecter.ToString(), ValueLabel = value.ToString() });
             }
-            chart = new LineChart()
-            {
+            chart = new LineChart() {
                 Entries = entriesH,
                 LineMode = LineMode.Straight,
                 LineSize = 8,

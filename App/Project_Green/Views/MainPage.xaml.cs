@@ -11,21 +11,16 @@ namespace Project_Green
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
-        IPScanner ipsc;
-        DatabaseManager pieter = new DatabaseManager();
-        
         public MainPage()
         {
             InitializeComponent();
-            ipsc = new IPScanner();
             NavigationPage.SetHasNavigationBar(this, true);
-            GreenhouseList.ItemsSource = pieter.GetGreenhouses();
+            GreenhouseList.ItemsSource = IPScanner.Instance.GetGreenhouses();
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private void ScanGreenhouses(object sender, EventArgs e)
         {
-            
-            GreenhouseList.ItemsSource = ipsc.GetGreenhouses();
+            GreenhouseList.ItemsSource = IPScanner.Instance.GetGreenhouses();
         }
 
         private void GreenhouseList_ItemTapped(object sender, ItemTappedEventArgs e)
@@ -33,12 +28,6 @@ namespace Project_Green
             var SelectedGreenhouse = e.Item as Greenhouse;
             var cp = new ChartPage(SelectedGreenhouse);
             Navigation.PushAsync(cp);
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            GreenhouseList.ItemsSource = pieter.GetGreenhouses();
         }
     }
 }

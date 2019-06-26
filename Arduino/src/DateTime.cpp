@@ -41,8 +41,8 @@ String GetCurrentDate()
   Serial.println();*/
 
   DateTime dt = __RTC.now();
-  char buff[100];
-  sprintf(buff, "%s-%s-%s", dt.year(), dt.month(), dt.day());
+  char buff[10];
+  sprintf(buff, "%s%s%s", dt.day(), dt.month(), dt.year());
   return buff;
 }
 
@@ -63,7 +63,7 @@ String GetCurrentTime()
   Serial.println();*/
 
   DateTime dt = __RTC.now();
-  char buff[100];
+  char buff[10];
   sprintf(buff, "%s-%s", dt.hour(), dt.minute());
   return buff;
 }

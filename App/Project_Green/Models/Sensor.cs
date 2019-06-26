@@ -18,6 +18,6 @@ namespace Project_Green.Models
         public decimal Humidity { get; set; }
         public decimal Moisture { get; set; }
         public int LightLevel { get; set; }
-        public bool WaterLevel { get; set; }
+        public int WaterLevel { get; set; }
     }
 }

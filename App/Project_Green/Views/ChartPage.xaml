@@ -15,11 +15,14 @@
     </ContentPage.ToolbarItems>
     <StackLayout>
         <StackLayout Orientation="Horizontal">
-            <Label Text="Pick a timetable :" FontSize="Medium" VerticalOptions="Center"/>
-            <Picker x:Name="DateSelecter" Title="Datum selectie" SelectedIndexChanged="DateChanged" VerticalOptions="CenterAndExpand" />
+            <Picker x:Name="ChartTimeTable" Title="Select a time frame" SelectedIndexChanged="ChartTimeTable_SelectedIndexChanged"  VerticalOptions="CenterAndExpand" />
+            <DatePicker x:Name="ChartDatePicker" MinimumDate="06/28/2018" MaximumDate="06/28/2019" DateSelected="ChartDatePicker_DateSelected" IsVisible="False"/>
+            <Picker x:Name="ChartWeekNumber" Title="Select a week number" SelectedIndexChanged="ChartWeekNumber_SelectedIndexChanged" IsVisible="False"/>
+            <Picker x:Name="ChartMonthName" Title="Select a Month" SelectedIndexChanged="ChartMonthName_SelectedIndexChanged" IsVisible="False"/>
         </StackLayout>
         <ScrollView>
             <StackLayout>
+                <Label x:Name="testdate"/>
                 <Label Text="Humidity" FontSize="Medium"/>
                 <Microchart:ChartView x:Name="HumidityChart" HeightRequest="250"/>
                 <Label Text="Temprature" FontSize="Medium"/>

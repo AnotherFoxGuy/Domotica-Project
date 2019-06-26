@@ -13,7 +13,6 @@ namespace Project_Green.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingsPage : ContentPage
     {
-        DatabaseManager databaseManager = new DatabaseManager();
         public SettingsPage(Greenhouse greenhouse)
         {    
             InitializeComponent();
@@ -52,7 +51,7 @@ namespace Project_Green.Views
         private void SaveSettings_Clicked(object sender, EventArgs e)
         {
             string x = $"/Images/{ImagePicker.SelectedItem}.png";
-            databaseManager.UpdateGreenhouse(12, Namechanger.Text, x);
+            DatabaseManager.Instance.UpdateGreenhouse(12, Namechanger.Text, x);
         }
         
     }
