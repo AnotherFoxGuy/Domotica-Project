@@ -11,6 +11,7 @@ set_property(TARGET CliTest PROPERTY DOTNET_TARGET_FRAMEWORK_VERSION "v4.7.2")
 
 set_property(TARGET CliTest PROPERTY VS_DOTNET_REFERENCES
     "Microsoft.CSharp"
+	"${CMAKE_BINARY_DIR}/packages/YamlDotNet.6.1.1/lib/net20/YamlDotNet.dll"
     "Newtonsoft.Json"
     "System"
     "System.Core"

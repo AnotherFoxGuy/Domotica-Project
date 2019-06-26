@@ -1,0 +1,35 @@
+- 
+    time: 23-59
+    temperature: 12.50
+    humidity: 35.70
+    lightlevel: 1111
+    moisture: 2222
+    waterlevel: 3333
+- 
+    time: 23-59
+    temperature: 12.50
+    humidity: 35.70
+    lightlevel: 1111
+    moisture: 2222
+    waterlevel: 3333
+- 
+    time: 23-59
+    temperature: 12.50
+    humidity: 35.70
+    lightlevel: 1111
+    moisture: 2222
+    waterlevel: 3333
+- 
+    time: 23-59
+    temperature: 12.50
+    humidity: 35.70
+    lightlevel: 1111
+    moisture: 2222
+    waterlevel: 3333
+- 
+    time: 23-59
+    temperature: 12.50
+    humidity: 35.70
+    lightlevel: 1111
+    moisture: 2222
+    waterlevel: 3333
