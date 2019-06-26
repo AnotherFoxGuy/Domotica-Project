@@ -23,7 +23,8 @@ void DataStorageloop()
   auto WaterSensor = analogRead(2);
 
   String buffer = "\
-- "+ GetCurrentTime() +":\n\
+-\n\
+    time :"+ GetCurrentTime() +":\n\
     temperature: "+ REST_Temperature +"\n\
     humidity: "+ REST_Humidity +"\n\
     lightlevel: "+ LightSensor +"\n\
@@ -41,15 +42,15 @@ void writeData2SD(String Data)
   // if the file opened okay, write to it:
   if (sensorDB)
   {
-    Serial.print("Writing to test.txt...");
+    Serial.print("Writing to file...");
     sensorDB.println(Data);
     sensorDB.close();
-    Serial.println("done.");
+    Serial.println("done!");
   }
   else
   {
     // if the file didn't open, print an error:
-    Serial.println("error opening test.txt");
+    Serial.println("error opening file");
   }
 }
 

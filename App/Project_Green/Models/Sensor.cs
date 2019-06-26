@@ -8,6 +8,9 @@ namespace Project_Green.Models
 {
     public class Sensor
     {
+        [Unique, PrimaryKey, NotNull]
+        public int Greenhouse_ID { get; set; }
+
         [Unique]
         public string Date { get; set; }
         public string Time { get; set; }

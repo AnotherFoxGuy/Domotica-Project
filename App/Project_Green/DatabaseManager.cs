@@ -19,9 +19,14 @@ namespace Project_Green
             return Connection.Query<Greenhouse>("SELECT * FROM Greenhouse");
         }
 
-        public void AddGreenhouse(int ID, string Name, string Image, string IP)
+        public List<Sensor> GetSensorData(string date, int greenhouse_id)
         {
-            Connection.Insert(new Greenhouse { Greenhouse_ID = ID, Greenhouse_Name = Name, Greenhouse_Image = Image, Greenhouse_IP = IP });
+            return Connection.Query<Sensor>($"SELECT AVG(Temperature, Humidity, WaterLevel, LightLevel, Moisture), Date FROM Sensor WHERE Data = {date} AND Greenhouse_ID = {greenhouse_id} GROUP BY Date");
+        }
+
+        public void AddGreenhouse(int ID, string Name, string Image)
+        {
+            Connection.Insert(new Greenhouse { Greenhouse_ID = ID, Greenhouse_Name = Name, Greenhouse_Image = Image });
         }
         public void DeleteGreenhouse(int ID)
         {

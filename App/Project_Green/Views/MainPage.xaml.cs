@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Project_Green.Models;
-using System.Net;
-using System.Text.RegularExpressions;
-using Microcharts;
-using SkiaSharp;
 using Project_Green.Views;
 
 namespace Project_Green
@@ -36,16 +28,17 @@ namespace Project_Green
             GreenhouseList.ItemsSource = ipsc.GetGreenhouses();
         }
 
-        private async void Button_Clicked_1(object sender, EventArgs e)
+        private void GreenhouseList_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            await Navigation.PushAsync( new ChartPage());
+            var SelectedGreenhouse = e.Item as Greenhouse;
+            var cp = new ChartPage(SelectedGreenhouse);
+            Navigation.PushAsync(cp);
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
             GreenhouseList.ItemsSource = pieter.GetGreenhouses();
-
         }
     }
 }
