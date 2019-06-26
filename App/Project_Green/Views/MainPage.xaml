@@ -17,7 +17,7 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Orientation="Horizontal">
-                            <Image Source="{Binding Greenhouse_Image}" WidthRequest="64"/>
+                            <Image Source="{Binding Greenhouse_Image}" WidthRequest="150"/>
                             <StackLayout>
                                 <Label Text="{Binding Greenhouse_Name}"/>
                                 <Label Text="{Binding Greenhouse_IP}"/>

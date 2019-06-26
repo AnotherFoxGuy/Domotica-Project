@@ -20,23 +20,32 @@ namespace Project_Green
     public partial class MainPage : ContentPage
     {
         IPScanner ipsc;
-
+        DatabaseManager pieter = new DatabaseManager();
+        
         public MainPage()
         {
             InitializeComponent();
             ipsc = new IPScanner();
             NavigationPage.SetHasNavigationBar(this, true);
-
+            GreenhouseList.ItemsSource = pieter.GetGreenhouses();
         }
 
         private void Button_Clicked(object sender, EventArgs e)
         {
+            
             GreenhouseList.ItemsSource = ipsc.GetGreenhouses();
         }
 
         private async void Button_Clicked_1(object sender, EventArgs e)
         {
             await Navigation.PushAsync( new ChartPage());
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            GreenhouseList.ItemsSource = pieter.GetGreenhouses();
+
         }
     }
 }

@@ -13,20 +13,16 @@ namespace Project_Green.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingsPage : ContentPage
     {
+        DatabaseManager pieter = new DatabaseManager();
+
         public SettingsPage()
         {    
             InitializeComponent();
             List<string> Imagesindexes = new List<string> { "GreenhouseDefault", "GreenHouse1", "GreenHouse2", "GreenHouse3", "GreenHouse4" , "GreenHouse5" };
             ImagePicker.ItemsSource = Imagesindexes;
-            ImagePicker.SelectedItem = "Default";
+            ImagePicker.SelectedItem = "GreenhouseDefault";
             Imagedisplay.Source = "/Images/GreenhouseDefault.png";
             //pak image van database van deze arduino 
-        }
-
-        private void GotoGraphsPage(object sender, EventArgs e)
-        {
-            Application.Current.MainPage = new ChartPage();
-          
         }
 
         private void Humidity_ValueChanged(object sender, ValueChangedEventArgs e)
@@ -54,5 +50,13 @@ namespace Project_Green.Views
         {
             Imagedisplay.Source = $"/Images/{ImagePicker.SelectedItem}.png";
         }
+
+        private void SaveSettings_Clicked(object sender, EventArgs e)
+        {
+            string x = $"/Images/{ImagePicker.SelectedItem}.png";
+            pieter.UpdateGreenhouse(12, Namechanger.Text,x);
+            
+        }
+        
     }
 }
