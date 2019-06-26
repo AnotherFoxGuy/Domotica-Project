@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Project_Green.Models;
-using System.Net;
-using System.Text.RegularExpressions;
-using Microcharts;
-using SkiaSharp;
 using Project_Green.Views;
-using Android.App;
 
 namespace Project_Green
 {
@@ -48,7 +39,6 @@ namespace Project_Green
         {
             base.OnAppearing();
             GreenhouseList.ItemsSource = pieter.GetGreenhouses();
-
         }
     }
 }
