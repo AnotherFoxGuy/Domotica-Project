@@ -14,6 +14,7 @@
 #include "DHT_imp.h"
 #include "DataStorage.h"
 #include "REST_Endpoints.h"
+#include "FileServe.h"
 
 RTC_DS1307 RTC;
 
@@ -37,8 +38,12 @@ Ticker DataStorageTimer(DataStorageloop, 300000, 0, MILLIS);
 
 void setup()
 {
+    pinMode(10, OUTPUT);
+    digitalWrite(10, HIGH); // Schakel Ethernet chip uit.
     // Start Serial
     Serial.begin(9600);
+
+    FileServeSetup();
 
     setupRestEndpoints(&rest);
 
@@ -49,7 +54,7 @@ void setup()
     rest.set_id(did);
 
     // Start the Ethernet connection and the server
-    //if no dhcp, use default ip
+    // if no dhcp, use default ip
     if (EthernetClass::begin(mac) == 0)
     {
         EthernetClass::begin(mac, ip);
@@ -69,6 +74,8 @@ void setup()
     // Start watchdog
     wdt_enable(WDTO_4S);
 
+    FileServeStartServer();
+
     delay(5);
 }
 
@@ -81,4 +88,5 @@ void loop()
 
     DHTTimer.update();
     DataStorageTimer.update();
+    FileServeLoop();
 }
