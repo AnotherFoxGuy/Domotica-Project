@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using Microcharts;
 using SkiaSharp;
 using Project_Green.Views;
+using Android.App;
 
 namespace Project_Green
 {
@@ -36,10 +37,11 @@ namespace Project_Green
             GreenhouseList.ItemsSource = ipsc.GetGreenhouses();
         }
 
-        private async Task GreenhouseList_ItemSelectedAsync(object sender, SelectedItemChangedEventArgs e)
+        private void GreenhouseList_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            var SelectedGreenhouse = e.SelectedItem as Greenhouse;
-            await Navigation.PushAsync(new ChartPage(SelectedGreenhouse));
+            var SelectedGreenhouse = e.Item as Greenhouse;
+            var cp = new ChartPage(SelectedGreenhouse);
+            Navigation.PushAsync(cp);
         }
 
         protected override void OnAppearing()

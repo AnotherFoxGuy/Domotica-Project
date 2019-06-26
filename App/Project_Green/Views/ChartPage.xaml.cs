@@ -21,7 +21,7 @@ namespace Project_Green.Views
             InitializeComponent();
             selectedGreenhouse = greenhouse;
             DateSelecter.ItemsSource = new List<string> { "Week", "Month", "Year" };
-            fillCharts();
+            //fillCharts();
         }
 
         public void fillCharts()

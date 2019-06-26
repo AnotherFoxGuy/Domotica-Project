@@ -10,7 +10,7 @@ namespace Project_Green
         DatabaseManager databasemanager = new DatabaseManager();
         public LineChart GetChartData(string YearMonthWeek, string Sensor)
         {
-
+            throw new NotImplementedException();
         }
     }
 }
