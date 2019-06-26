@@ -8,8 +8,10 @@
              Title="Settings"
              >
     <StackLayout Orientation="Vertical">
+        <Label Text="Name of GreenHouse : " FontSize="Medium"/>
+        <Entry x:Name="Namechanger"/>
         <Label x:Name="TempratureLable" Text="Trigger fans on Temprature : " FontSize="Medium"/>
-        <Slider x:Name="TempratureSlider" ValueChanged="TempratureSlider_ValueChanged"  MaximumTrackColor="Red" MinimumTrackColor="Green" Minimum="-50" Maximum="50"/>
+        <Slider x:Name="TempratureSlider" ValueChanged="TempratureSlider_ValueChanged"  MaximumTrackColor="Red" MinimumTrackColor="Green" Minimum="0" Maximum="50"/>
         <Label x:Name="HumidityLable" Text="Auto Watering : " FontSize="Medium"/>
         <Slider x:Name="HumiditySlider" ValueChanged="Humidity_ValueChanged" MaximumTrackColor="Red" MinimumTrackColor="Green" Minimum="0" Maximum="100"/>
         <Button x:Name="Watering" Text="Water plants"/>
@@ -17,7 +19,10 @@
             <Label Text="Fans :" FontSize="Medium"/>
             <Switch  x:Name="Fans" Toggled="Fans_Toggled" />
         </StackLayout>
+        <Label Text="Select a Image :" FontSize="Medium"/>
         <Picker x:Name="ImagePicker" Title="Select a image" SelectedIndexChanged="ImagePicker_SelectedIndexChanged"/>
         <Image x:Name="Imagedisplay" Source="/Images/GreenHouseDefault.png" HeightRequest="150"/>
+        <Button x:Name="SaveSettings" Clicked="SaveSettings_Clicked" VerticalOptions="EndAndExpand" HorizontalOptions="EndAndExpand" Text="Save" BackgroundColor="#29ad29"/>
     </StackLayout>
+    
 </ContentPage>

@@ -23,6 +23,7 @@ namespace Project_Green.Views
             List<string> dates = new List<string> { "Week", "Month", "Year" };
             DateSelecter.ItemsSource = dates;
             fillCharts();
+
           
          
         }
