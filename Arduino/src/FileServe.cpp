@@ -65,7 +65,7 @@ void FileServeLoop()
                     if (webFile)
                     {
                         client.println("HTTP/1.1 200 OK");
-                        client.println("Content-Type: text/html");
+                        client.println("Content-Type: text/yaml");
                         client.println("Connnection: close");
                         client.println();
                         while (webFile.available())
@@ -77,8 +77,7 @@ void FileServeLoop()
                     }
                     else
                     {
-                        client.println("HTTP/1.1 404 NOT_FOUND");
-                        client.println("Content-Type: text/html");
+                        client.println("HTTP/1.1 404 Not Found");
                         client.println("Connnection: close");
                         client.println();
                     }
