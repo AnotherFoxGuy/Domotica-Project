@@ -28,12 +28,13 @@ namespace Project_Green.Views
         private void SetTimer()
         {
             Test.Text = "Timer Started";
-            Device.StartTimer(TimeSpan.FromSeconds(6), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(10), () =>
             {
                 try
                 {
                     i++;
                     FillData();
+                    Test.Text = "Verbonden met Arduino";
                     return true; // return true to repeat counting, false to stop timer
                 }
                 catch (Exception e)
@@ -45,11 +46,11 @@ namespace Project_Green.Views
         }
         public void FillData()
         {
-            LiveTemprature.Text = rest.Temperature().Return_value.ToString();
-            LiveHumidity.Text = rest.Humidity().Return_value.ToString();
-            LiveLightIntensity.Text = rest.Analog(1).Return_value.ToString();
-            LiveWaterLevel.Text = rest.Analog(2).Return_value.ToString();
-            LiveSoilMoister.Text = rest.Analog(3).Return_value.ToString();
+            LiveTemprature.Text = $"Temprature : {rest.Temperature().Return_value.ToString()}";
+            LiveHumidity.Text = $"Humidity : {rest.Humidity().Return_value.ToString()} ";
+            LiveLightIntensity.Text = $"Light intesety : {rest.Analog(1).Return_value.ToString()} " ;
+            LiveWaterLevel.Text = $"Water Level : {rest.Analog(2).Return_value.ToString()}";
+            LiveSoilMoister.Text = $"Soil Moister : {rest.Analog(3).Return_value.ToString()}";
         }
     }
   
