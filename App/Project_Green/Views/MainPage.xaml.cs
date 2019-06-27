@@ -16,7 +16,7 @@ namespace Project_Green
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, true);
             GreenhouseList.ItemsSource = IPScanner.Instance.GetGreenhouses();
-            GreenhouseList.ItemsSource = DatabaseManager.Instance.GetGreenhouses();
+            GreenhouseList.ItemsSource = DatabaseManager.Instance.GetGreenhouses(); // haal deze weg in uit in eind product
         }
 
         private void ScanGreenhouses(object sender, EventArgs e)
@@ -29,6 +29,12 @@ namespace Project_Green
             var SelectedGreenhouse = e.Item as Greenhouse;
             var cp = new ChartPage(SelectedGreenhouse);
             Navigation.PushAsync(cp);
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            GreenhouseList.ItemsSource = IPScanner.Instance.GetGreenhouses();
+            GreenhouseList.ItemsSource = DatabaseManager.Instance.GetGreenhouses(); //haal deze weg in eind product 
         }
     }
 }
