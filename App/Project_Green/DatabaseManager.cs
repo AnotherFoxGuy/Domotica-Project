@@ -45,9 +45,9 @@ namespace Project_Green
 
 
         //check of onderstaande code nog relevant is!!
-        public void AddGreenhouse(int ID, string Name, string Image)
+        public void AddGreenhouse(int ID, string Name, string Image , string IP )
         {
-            Connection.Insert(new Greenhouse { Greenhouse_ID = ID, Greenhouse_Name = Name, Greenhouse_Image = Image });
+            Connection.Insert(new Greenhouse { Greenhouse_ID = ID, Greenhouse_Name = Name, Greenhouse_Image = Image , Greenhouse_IP = IP});
         }
         public void DeleteGreenhouse(int ID)
         {

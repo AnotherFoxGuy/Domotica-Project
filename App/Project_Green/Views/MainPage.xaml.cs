@@ -10,12 +10,13 @@ namespace Project_Green
     // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
-    {
+    {  
         public MainPage()
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, true);
             GreenhouseList.ItemsSource = IPScanner.Instance.GetGreenhouses();
+            GreenhouseList.ItemsSource = DatabaseManager.Instance.GetGreenhouses();
         }
 
         private void ScanGreenhouses(object sender, EventArgs e)

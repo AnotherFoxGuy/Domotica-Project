@@ -12,6 +12,7 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem  Name="Home" Order="Primary" Icon="/Images/home.png" Text="Home" Priority="0" Clicked="Home_Clicked"/>
         <ToolbarItem Name="Settings" Order="Primary" Icon="/Images/cogs.png" Text="Settings" Priority="1" Clicked="Settings_Clicked"/>
+        <ToolbarItem Name="LiveData" Order="Primary" Text="LiveData" Priority="2" Clicked="LiveData_Clicked"/>
     </ContentPage.ToolbarItems>
     <StackLayout>
         <StackLayout Orientation="Horizontal">
