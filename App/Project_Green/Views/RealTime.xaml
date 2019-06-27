@@ -8,11 +8,12 @@
              Title="Live Data">
     <ContentPage.Content>
         <StackLayout>
-            <Label x:Name="Temprature"/>
-            <Label x:Name="Humidity"/>
-            <Label x:Name="SoilMoister"/>
-            <Label x:Name="LightInesety"/>
-            <Label x:Name="WaterLevel"/>
+            <Label x:Name="Test" FontSize="Medium"/>
+            <Label x:Name="LiveTemprature" FontSize="Medium"/>
+            <Label x:Name="LiveHumidity" FontSize="Medium"/>
+            <Label x:Name="LiveSoilMoister" FontSize="Medium"/>
+            <Label x:Name="LiveLightIntensity" FontSize="Medium"/>
+            <Label x:Name="LiveWaterLevel" FontSize="Medium"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

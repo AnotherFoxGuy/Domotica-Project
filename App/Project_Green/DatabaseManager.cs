@@ -10,6 +10,8 @@ namespace Project_Green
     public class DatabaseManager
     {
         readonly SQLiteConnection Connection;
+        public string CurrentIP;
+        
 
         public List<Greenhouse> GetGreenhouses()
         {

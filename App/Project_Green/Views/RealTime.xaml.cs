@@ -27,8 +27,8 @@ namespace Project_Green.Views
         }
         private void SetTimer()
         {
-            LiveData1.Text = "Timer Started";
-            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            Test.Text = "Timer Started";
+            Device.StartTimer(TimeSpan.FromSeconds(6), () =>
             {
                 try
                 {
@@ -38,17 +38,18 @@ namespace Project_Green.Views
                 }
                 catch (Exception e)
                 {
-                    LiveData1.Text = e.Message;
+                    Test.Text = e.Message;
                     return false;
                 }
             });
         }
         public void FillData()
         {
-            LiveData1.Text = rest.Analog(1).Return_value.ToString();
-            LiveData2.Text = rest.Analog(2).Return_value.ToString();
-            LiveData3.Text = rest.Analog(3).Return_value.ToString();
-            LiveData4.Text = rest.Analog(4).Return_value.ToString();
+            LiveTemprature.Text = rest.Temperature().Return_value.ToString();
+            LiveHumidity.Text = rest.Humidity().Return_value.ToString();
+            LiveLightIntensity.Text = rest.Analog(1).Return_value.ToString();
+            LiveWaterLevel.Text = rest.Analog(2).Return_value.ToString();
+            LiveSoilMoister.Text = rest.Analog(3).Return_value.ToString();
         }
     }
   
