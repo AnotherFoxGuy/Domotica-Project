@@ -13,6 +13,7 @@ namespace Project_Green.Models
 
         [Unique]
         public string Date { get; set; }
+        [NotNull]
         public string Time { get; set; }
         public decimal Temperature { get; set; }
         public decimal Humidity { get; set; }
