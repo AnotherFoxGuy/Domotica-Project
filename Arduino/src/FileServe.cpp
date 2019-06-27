@@ -12,18 +12,6 @@ EthernetServer fileServer(8080); // Intialiseer de ethernet server bibliotheek
 
 void FileServeSetup()
 {
-    Serial.print("Initializing SD card...");
-    if (!SD.begin(4))
-    {
-        Serial.println("initialization failed!");
-    }
-    else
-    {
-        Serial.println("initialization done.");
-    }
-}
-void FileServeStartServer()
-{
     fileServer.begin(); // Start de server.
 }
 void FileServeLoop()

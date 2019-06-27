@@ -8,12 +8,11 @@
 
 // Libraries
 #include "Prerequisites.h"
-#include "Ticker.h"
+#include <Ticker.h>
+#include <aREST.h>
 
 // headers
-#include "DHT_imp.h"
 #include "DataStorage.h"
-#include "REST_Endpoints.h"
 #include "FileServe.h"
 
 RTC_DS1307 RTC;
@@ -33,6 +32,11 @@ EthernetServer server(80);
 // Create aREST instance
 aREST rest = aREST();
 
+void DHTloop();
+DHT dht;
+float REST_Temperature;
+float REST_Humidity;
+
 Ticker DHTTimer(DHTloop, 2000);
 Ticker DataStorageTimer(DataStorageloop, 300000, 0, MILLIS);
 
@@ -41,11 +45,17 @@ void setup()
     pinMode(10, OUTPUT);
     digitalWrite(10, HIGH); // Schakel Ethernet chip uit.
     // Start Serial
-    Serial.begin(9600);
+    Serial.begin(115200);
 
-    FileServeSetup();
-
-    setupRestEndpoints(&rest);
+    Serial.print("Initializing SD card...");
+    if (!SD.begin(4))
+    {
+        Serial.println("initialization failed!");
+    }
+    else
+    {
+        Serial.println("initialization done.");
+    }
 
     // Give name & ID to the device (ID should be 6 characters long)
     char message[19] = "Bloemkool_BoilerV3";
@@ -65,7 +75,10 @@ void setup()
     Serial.print(sm);
     Serial.println(EthernetClass::localIP());
 
-    DHTsetup(&rest);
+    // Start humidity and temp sensor
+    rest.variable("temperature", &REST_Temperature);
+    rest.variable("humidity", &REST_Humidity);
+    dht.setup(8);
     DHTTimer.start();
 
     DataStorageSetup();
@@ -74,7 +87,7 @@ void setup()
     // Start watchdog
     wdt_enable(WDTO_4S);
 
-    FileServeStartServer();
+    FileServeSetup();
 
     delay(5);
 }
@@ -89,4 +102,10 @@ void loop()
     DHTTimer.update();
     DataStorageTimer.update();
     FileServeLoop();
+}
+
+void DHTloop()
+{
+    REST_Temperature = dht.getTemperature();
+    REST_Humidity = dht.getHumidity();
 }
