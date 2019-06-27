@@ -51,7 +51,7 @@ namespace Project_Green.Views
         private void SaveSettings_Clicked(object sender, EventArgs e)
         {
             string x = $"/Images/{ImagePicker.SelectedItem}.png";
-            DatabaseManager.Instance.UpdateGreenhouse(12, Namechanger.Text, x);
+            //DatabaseManager.Instance.UpdateGreenhouse(12, Namechanger.Text, x);
         }
         
     }
