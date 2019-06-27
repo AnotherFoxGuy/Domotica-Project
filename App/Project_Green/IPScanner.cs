@@ -24,7 +24,7 @@ namespace Project_Green
             Greenhouses.Clear();
             var address = regex.Match(addresses[0].ToString()).ToString();
             var iplist = new List<string>();
-            for (int i = 2; i < 20; i++)
+            for (int i = 102; i < 120; i++)
                 iplist.Add($"{address}.{i}");
 
             List<Thread> threads = new List<Thread>();
@@ -51,6 +51,20 @@ namespace Project_Green
         {
             Greenhouses.Add(gr);
         }
+
+        #region Singleton
+
+        private static readonly Lazy<IPScanner> LazyIPScanner =
+            new Lazy<IPScanner>(() => new IPScanner());
+
+        public static IPScanner Instance => LazyIPScanner.Value;
+
+        private IPScanner()
+        {
+           
+        }
+
+        #endregion
     }
 
 

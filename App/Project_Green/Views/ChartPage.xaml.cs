@@ -14,27 +14,22 @@ namespace Project_Green.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ChartPage : ContentPage
     {
-        StatMeister pieter = new StatMeister();
+        ChartData chartData = new ChartData();
         Greenhouse selectedGreenhouse;
         public ChartPage(Greenhouse greenhouse)
         {
             InitializeComponent();
             selectedGreenhouse = greenhouse;
-            DateSelecter.ItemsSource = new List<string> { "Week", "Month", "Year" };
-            //fillCharts();
+            ChartTimeTable.ItemsSource = new List<string> { "Day", "Week", "Month", "Year" };
+            ChartWeekNumber.ItemsSource = Enumerable.Range(1, 52).ToList();
+            ChartMonthName.ItemsSource = new List<string> { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "Noveber", "December" };
         }
 
-        public void fillCharts()
+        public void fillCharts(string timeTable, int dateWeekMonth)
         {
-            int dateselecter = pieter.EntryCount((string)DateSelecter.SelectedItem);
-            HumidityChart.Chart = pieter.MakeLineChart(dateselecter);
-            TempratureChart.Chart = pieter.FillTempratureChart(dateselecter);
-            MoisterChart.Chart = pieter.FillSoilMoisterChart(dateselecter);
-        }
-       
-        private void DateChanged(object sender, EventArgs e)
-        {
-            fillCharts();
+            HumidityChart.Chart = chartData.GetChartDataBy(timeTable, dateWeekMonth, "Humidity", selectedGreenhouse.Greenhouse_ID);
+            TempratureChart.Chart = chartData.GetChartDataBy(timeTable, dateWeekMonth, "Temperature", selectedGreenhouse.Greenhouse_ID);
+            MoisterChart.Chart = chartData.GetChartDataBy(timeTable, dateWeekMonth, "Moisture", selectedGreenhouse.Greenhouse_ID);
         }
 
         private async void Settings_Clicked(object sender, EventArgs e)
@@ -45,6 +40,53 @@ namespace Project_Green.Views
         private async void Home_Clicked(object sender, EventArgs e)
         {
             await Navigation.PopAsync();
+        }
+
+        private void ChartTimeTable_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Picker picker = sender as Picker;
+            switch (picker.SelectedItem.ToString())
+            {
+                case "Day":
+                    ChartDatePicker.IsVisible = true;
+                    ChartWeekNumber.IsVisible = false;
+                    ChartMonthName.IsVisible = false;
+                    break;
+
+                case "Week":
+                    ChartDatePicker.IsVisible = false;
+                    ChartWeekNumber.IsVisible = true;
+                    ChartMonthName.IsVisible = false;
+                    break;
+
+                case "Month":
+                    ChartDatePicker.IsVisible = false;
+                    ChartWeekNumber.IsVisible = false;
+                    ChartMonthName.IsVisible = true;
+                    break;
+
+                default:
+                    ChartDatePicker.IsVisible = false;
+                    ChartWeekNumber.IsVisible = false;
+                    ChartMonthName.IsVisible = false;
+                    fillCharts(picker.SelectedItem.ToString(), 2019);
+                    break;
+            }
+        }
+
+        private void ChartDatePicker_DateSelected(object sender, DateChangedEventArgs e)
+        {
+            testdate.Text = e.NewDate.ToShortDateString().Replace("-", string.Empty); //28-6-2019 => 2862019
+        }
+
+        private void ChartWeekNumber_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ChartMonthName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
