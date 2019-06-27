@@ -1,9 +1,10 @@
-﻿using Microcharts;
+using Microcharts;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Project_Green.Models;
 using SkiaSharp;
+using System.Globalization;
 
 namespace Project_Green
 {
@@ -11,8 +12,7 @@ namespace Project_Green
     {
         public LineChart GetChartDataBy(string timeTable, int date, string sensor, int greenhouse_Id)
         {
-            int min = 0;
-            int max = 100;
+            LineChart lineChart = new LineChart();
             List<ChartEntry> entries = new List<ChartEntry>();
             List<Sensor> sensorData = DatabaseManager.Instance.GetSensorData(timeTable, date, sensor, greenhouse_Id);
             foreach (Sensor data in sensorData)
@@ -26,7 +26,7 @@ namespace Project_Green
                             Label = timeTable,
                             ValueLabel = sensor
                         });
-                        
+                        lineChart = BuildLineChart(200, 0);
                         break;
                     case "Temperature":
                         entries.Add(new ChartEntry((float)data.Temperature)
@@ -35,8 +35,7 @@ namespace Project_Green
                             Label = timeTable,
                             ValueLabel = sensor
                         });
-                        min = -50;
-                        max = 50;
+                        lineChart = BuildLineChart(50, -50);
                         break;
                     case "LightLevel":
                         entries.Add(new ChartEntry(data.LightLevel)
@@ -45,7 +44,7 @@ namespace Project_Green
                             Label = timeTable,
                             ValueLabel = sensor
                         });
-                        max = 1024;
+                        lineChart = BuildLineChart(1000, 0);
                         break;
                     case "Moisture":
                         entries.Add(new ChartEntry((float)data.Moisture)
@@ -54,6 +53,7 @@ namespace Project_Green
                             Label = timeTable,
                             ValueLabel = sensor
                         });
+                        lineChart = BuildLineChart(1000, 0);
                         break;
                     case "WaterLevel":
                         entries.Add(new ChartEntry(data.WaterLevel)
@@ -62,22 +62,27 @@ namespace Project_Green
                             Label = timeTable,
                             ValueLabel = sensor
                         });
-                        max = 1024;
+                        lineChart = BuildLineChart(1000, 0);
                         break;
                 }
             }
 
-            return new LineChart()
+            LineChart BuildLineChart(int max, int min)
             {
-                Entries = entries,
-                LineMode = LineMode.Straight,
-                LineSize = 8,
-                LabelTextSize = 50,
-                PointMode = PointMode.Circle,
-                PointSize = 25,
-                MaxValue = max,
-                MinValue = min
-            };
+                LineChart MaxlineChart = new LineChart()
+                {
+                    Entries = entries,
+                    LineMode = LineMode.Straight,
+                    LineSize = 8,
+                    LabelTextSize = 50,
+                    PointMode = PointMode.Circle,
+                    PointSize = 25,
+                    MaxValue = max,
+                    MinValue = min
+                };
+                return MaxlineChart;
+            }
+            return lineChart;
         }
 
         public string GetColor(int value)

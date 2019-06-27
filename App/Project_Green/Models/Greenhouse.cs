@@ -17,5 +17,9 @@ namespace Project_Green.Models
         public string Greenhouse_Image { get; set; }
 
         public string Greenhouse_IP { get; set; }
+
+        public float SettingsTemperatureSlider { get; set; }
+
+        public float SettingsMoistureSlider { get; set; }
     }
 }
