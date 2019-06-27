@@ -33,6 +33,17 @@ namespace ArdunoRest
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<Success> AnalogAsync(int pin_number, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
+        /// <param name="mode">Needs to be i or o</param>
+        /// <returns>Message</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        Message Mode(int pin_number, string mode);
+    
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <param name="mode">Needs to be i or o</param>
+        /// <returns>Message</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<Message> ModeAsync(int pin_number, string mode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         Success DigitalGet(int pin_number);
@@ -42,14 +53,14 @@ namespace ArdunoRest
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<Success> DigitalGetAsync(int pin_number, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
-        /// <returns>Success</returns>
+        /// <returns>Message</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        Success DigitalGet(int pin_number, int status);
+        Message DigitalGet(int pin_number, int status);
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Success</returns>
+        /// <returns>Message</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Success> DigitalGetAsync(int pin_number, int status, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Message> DigitalGetAsync(int pin_number, int status, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -251,6 +262,85 @@ namespace ArdunoRest
             }
         }
     
+        /// <param name="mode">Needs to be i or o</param>
+        /// <returns>Message</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public Message Mode(int pin_number, string mode)
+        {
+            return System.Threading.Tasks.Task.Run(async () => await ModeAsync(pin_number, mode, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
+        }
+    
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <param name="mode">Needs to be i or o</param>
+        /// <returns>Message</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public async System.Threading.Tasks.Task<Message> ModeAsync(int pin_number, string mode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            if (pin_number == null)
+                throw new System.ArgumentNullException("pin_number");
+    
+            if (mode == null)
+                throw new System.ArgumentNullException("mode");
+    
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/mode/{pin number}/{mode}");
+            urlBuilder_.Replace("{pin number}", System.Uri.EscapeDataString(ConvertToString(pin_number, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{mode}", System.Uri.EscapeDataString(ConvertToString(mode, System.Globalization.CultureInfo.InvariantCulture)));
+    
+            var client_ = new System.Net.Http.HttpClient();
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+    
+                    PrepareRequest(client_, request_, urlBuilder_);
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+                    PrepareRequest(client_, request_, url_);
+    
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+    
+                        ProcessResponse(client_, response_);
+    
+                        var status_ = ((int)response_.StatusCode).ToString();
+                        if (status_ == "200") 
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<Message>(response_, headers_).ConfigureAwait(false);
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ != "200" && status_ != "204")
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
+                        }
+            
+                        return default(Message);
+                    }
+                    finally
+                    {
+                        if (response_ != null)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (client_ != null)
+                    client_.Dispose();
+            }
+        }
+    
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public Success DigitalGet(int pin_number)
@@ -324,17 +414,17 @@ namespace ArdunoRest
             }
         }
     
-        /// <returns>Success</returns>
+        /// <returns>Message</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public Success DigitalGet(int pin_number, int status)
+        public Message DigitalGet(int pin_number, int status)
         {
             return System.Threading.Tasks.Task.Run(async () => await DigitalGetAsync(pin_number, status, System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Success</returns>
+        /// <returns>Message</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Success> DigitalGetAsync(int pin_number, int status, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Message> DigitalGetAsync(int pin_number, int status, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (pin_number == null)
                 throw new System.ArgumentNullException("pin_number");
@@ -375,7 +465,7 @@ namespace ArdunoRest
                         var status_ = ((int)response_.StatusCode).ToString();
                         if (status_ == "200") 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Success>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Message>(response_, headers_).ConfigureAwait(false);
                             return objectResponse_.Object;
                         }
                         else
@@ -385,7 +475,7 @@ namespace ArdunoRest
                             throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
             
-                        return default(Success);
+                        return default(Message);
                     }
                     finally
                     {
@@ -707,6 +797,30 @@ namespace ArdunoRest
         /// <summary>The requested data.</summary>
         [Newtonsoft.Json.JsonProperty("return_value", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? Return_value { get; set; }
+    
+        /// <summary>The device ID.</summary>
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Id { get; set; }
+    
+        /// <summary>The device name.</summary>
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Name { get; set; }
+    
+        /// <summary>The hardware it is runing on.</summary>
+        [Newtonsoft.Json.JsonProperty("hardware", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Hardware { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("connected", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? Connected { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.20.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class Message 
+    {
+        [Newtonsoft.Json.JsonProperty("message", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Message1 { get; set; }
     
         /// <summary>The device ID.</summary>
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
