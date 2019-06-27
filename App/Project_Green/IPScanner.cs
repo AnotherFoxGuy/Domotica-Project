@@ -97,6 +97,7 @@ namespace Project_Green
         {
             Ping ping = new Ping();
             PingReply pingReply;
+            string imagesource = "/Images/DefaultGreenhouse.png";
 
             pingReply = ping.Send(host, 500);
 
@@ -116,12 +117,15 @@ namespace Project_Green
                     };
 
                     var id = client.Id();
+                    if (DatabaseManager.Instance.GetImageSource(Convert.ToInt32(id.Id)) != null)
+                        imagesource = DatabaseManager.Instance.GetImageSource(Convert.ToInt32(id.Id)).Greenhouse_Image;
+
                     callback(new Greenhouse
                     {
                         Greenhouse_ID = id.Id ?? 99,
                         Greenhouse_Name = id.Name,
                         Greenhouse_IP = host,
-                        Greenhouse_Image = "Images/GreenhouseDefault.png"
+                        Greenhouse_Image = imagesource
                     });
                 }
                 catch { }

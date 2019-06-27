@@ -15,25 +15,29 @@ namespace Project_Green.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RealTime : ContentPage
     {
-        int i;
-        ArdunoRestClient rest = new ArdunoRestClient {};
-        Greenhouse greenhouse;
+        readonly ArdunoRestClient rest;
+        readonly Greenhouse greenhouse;
+
         public RealTime(Greenhouse greenhouse)
         {
             InitializeComponent();
             this.greenhouse = greenhouse;
+            rest = new ArdunoRestClient { BaseUrl = $"http://{greenhouse.Greenhouse_IP}/" };
             SetTimer();
 
         }
         private void SetTimer()
         {
             Test.Text = "Timer Started";
-            Device.StartTimer(TimeSpan.FromSeconds(10), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
                 try
                 {
-                    i++;
-                    FillData();
+                    LiveTemprature.Text = $"Temprature : {rest.Temperature().Temperature.ToString()}";
+                    LiveHumidity.Text = $"Humidity : {rest.Humidity().Humidity.ToString()} ";
+                    LiveLightIntensity.Text = $"Light intesety : {rest.Analog(0).Return_value.ToString()} ";
+                    LiveWaterLevel.Text = $"Water Level : {rest.Analog(1).Return_value.ToString()}";
+                    LiveSoilMoister.Text = $"Soil Moister : {rest.Analog(2).Return_value.ToString()}";
                     Test.Text = "Verbonden met Arduino";
                     return true; // return true to repeat counting, false to stop timer
                 }
@@ -44,14 +48,6 @@ namespace Project_Green.Views
                 }
             });
         }
-        public void FillData()
-        {
-            LiveTemprature.Text = $"Temprature : {rest.Temperature().Temperature.ToString()}";
-            LiveHumidity.Text = $"Humidity : {rest.Humidity().Humidity.ToString()} ";
-            LiveLightIntensity.Text = $"Light intesety : {rest.Analog(1).Return_value.ToString()} " ;
-            LiveWaterLevel.Text = $"Water Level : {rest.Analog(2).Return_value.ToString()}";
-            LiveSoilMoister.Text = $"Soil Moister : {rest.Analog(3).Return_value.ToString()}";
-        }
     }
-  
+
 }

@@ -14,12 +14,12 @@ namespace Project_Green.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingsPage : ContentPage
     {
-        Greenhouse greenhouse;
+        
         ArdunoRestClient rest = new ArdunoRestClient { };
         public SettingsPage(Greenhouse greenhouse)
         {    
             InitializeComponent();
-            this.greenhouse = greenhouse;
+            DatabaseManager.Instance.greenhouse = greenhouse;
             UseSettings();
            
             
@@ -28,8 +28,8 @@ namespace Project_Green.Views
         public void UseSettings()
         {
             ImagePicker.ItemsSource = new List<string> { "GreenHouse1", "GreenHouse2", "GreenHouse3", "GreenHouse4", "GreenHouse5", "GreenhouseDefault" };
-            Imagedisplay.Source = greenhouse.Greenhouse_Image;
-            Namechanger.Text = greenhouse.Greenhouse_Name;
+            Imagedisplay.Source = DatabaseManager.Instance.greenhouse.Greenhouse_Image;
+            Namechanger.Text = DatabaseManager.Instance.greenhouse.Greenhouse_Name;
             //TempratureSlider = greenhouse.Greenhouse_TempSlider; heb data base voor nodig 
             //HumiditySlider = greenhouse.Greenhouse_HumiSlider;
             Fixbar();
@@ -37,8 +37,7 @@ namespace Project_Green.Views
         
         private void TempratureSlider_ValueChanged(object sender, ValueChangedEventArgs e)
         {
-
-            TempratureLable.Text = $"Trigger fans on Temprature : {Convert.ToSingle(TempratureSlider.Value).ToString()} ";
+            TempratureLabel.Text = $"Trigger fans on Temprature : {Convert.ToSingle(TempratureSlider.Value).ToString()} ";
         }
 
         private void ImagePicker_SelectedIndexChanged(object sender, EventArgs e)
@@ -51,14 +50,13 @@ namespace Project_Green.Views
             string x = $"/Images/{ImagePicker.SelectedItem}.png";
             float TempSliderValue = Convert.ToSingle(TempratureSlider.Value);
             float SoilmoisterValue = Convert.ToSingle(SoilmoisterSlider.Value);
-            // DatabaseManager.Instance.UpdateGreenhouse(greenhouse.Greenhouse_ID, Namechanger.Text, x , TempSliderValue , HumiSliderValue);
-            //DatabaseManager.Instance.UpdateGreenhouse(greenhouse.Greenhouse_ID, Namechanger.Text, x);
+            DatabaseManager.Instance.UpdateGreenhouse(Namechanger.Text, x , TempSliderValue , SoilmoisterValue);
         }
         private void Fixbar()
         {
             for (int i = 0; i < ImagePicker.ItemsSource.Count; i++)
             {
-                if (greenhouse.Greenhouse_Image.ToString().Contains(i.ToString()))
+                if (DatabaseManager.Instance.greenhouse.Greenhouse_Image.ToString().Contains(i.ToString()))
                 {
                     ImagePicker.SelectedItem = ImagePicker.ItemsSource[i - 1];
                     break;
@@ -72,7 +70,10 @@ namespace Project_Green.Views
 
         private void FanToggle_Toggled(object sender, ToggledEventArgs e)
         {
-
+            if (FanToggle.IsToggled == false)
+                rest.DigitalGet(2, 0);
+            else
+                rest.DigitalGet(2, 1);
         }
 
         private void Watering_Clicked(object sender, EventArgs e)
@@ -84,8 +85,7 @@ namespace Project_Green.Views
 
         private void SoilmoisterSlider_ValueChanged(object sender, ValueChangedEventArgs e)
         {
-            string x = $"/Images/{ImagePicker.SelectedItem}.png";
-            //DatabaseManager.Instance.UpdateGreenhouse(12, Namechanger.Text, x);
+            SoilMoisterLabel.Text = $"Trigger fans on Temprature : {Convert.ToSingle(SoilmoisterSlider.Value).ToString()}";
         }
     }
 }

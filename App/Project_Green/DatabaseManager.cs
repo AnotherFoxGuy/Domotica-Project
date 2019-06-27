@@ -5,6 +5,10 @@ using SQLite;
 using Xamarin.Forms;
 using Project_Green.Models;
 using System.Globalization;
+using System.IO;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
+using System.Net;
 
 namespace Project_Green
 {
@@ -12,16 +16,54 @@ namespace Project_Green
     {
         readonly SQLiteConnection Connection;
         public string CurrentIP;
-        
+
+        public Greenhouse greenhouse;
+
+        public void YamlDeserializer()
+        {
+            string document;
+            using (var wc = new System.Net.WebClient())
+                document = wc.DownloadString($"http://{greenhouse.Greenhouse_IP}:8080/2706.TXT");
+
+            var input = new StringReader(document);
+            var deserializer = new DeserializerBuilder()
+                .Build();
+            var list = deserializer.Deserialize<List<SensorYaml>>(input);
+
+            foreach (var item in list)
+            {
+                Connection.Insert(new Sensor
+                {
+                    Time = item.time,
+                    Date = "27062019",
+                    Greenhouse_ID = greenhouse.Greenhouse_ID,
+                    Humidity = (decimal)item.humidity,
+                    Temperature = (decimal)item.temperature,
+                    WaterLevel = item.waterlevel,
+                    LightLevel = (int)item.lightlevel,
+                    Moisture = item.moisture
+                });
+            }
+        }
 
         public List<Greenhouse> GetGreenhouses()
         {
             return Connection.Query<Greenhouse>("SELECT * FROM Greenhouse");
         }
 
+        public Greenhouse GetImageSource(int ID)
+        {
+            return Connection.FindWithQuery<Greenhouse>($"SELECT * FROM Greenhouse WHERE Greenhouse_ID = {ID}");
+        }
+
         public List<Sensor> GetAvgSensorData(int date, string sensor, int greenhouse_Id)
         {
             return Connection.Query<Sensor>($"SELECT AVG({sensor}), Date FROM Sensor WHERE Date = {date} AND Greenhouse_ID = {greenhouse_Id} GROUP BY Date");
+        }
+
+        public void UpdateGreenhouse(string Name, string Image, float temperature, float moisture)
+        {
+            Connection.Query<Greenhouse>($"UPDATE Greenhouse SET Greenhouse_Name = \"{Name}\" , Greenhouse_Image = \"{Image}\" , SettingsTemperatureSlider = \"{temperature}\", SettingsMoistureSlider = \"{moisture}\" WHERE Greenhouse_ID = \"{greenhouse.Greenhouse_ID}\"");
         }
 
         public List<Sensor> GetSensorData(string timeTable, int date, string sensor, int greenhouse_Id)

@@ -13,10 +13,10 @@
     <StackLayout Orientation="Vertical">
         <Label Text="Name of GreenHouse : " FontSize="Medium"/>
         <Entry x:Name="Namechanger"/>
-        <Label x:Name="TempratureLable" Text="Trigger fans on Temprature : " FontSize="Medium"/>
+        <Label x:Name="TempratureLabel" Text="Trigger fans on Temprature : " FontSize="Medium"/>
         <Slider x:Name="TempratureSlider" ValueChanged="TempratureSlider_ValueChanged"  MaximumTrackColor="Red" MinimumTrackColor="Green" Minimum="0" Maximum="50"/>
-        <Label x:Name="HumidityLable" Text="Auto Watering : " FontSize="Medium"/>
-        <Slider x:Name="SoilmoisterSlider" ValueChanged="SoilmoisterSlider_ValueChanged" MaximumTrackColor="Red" MinimumTrackColor="Green" Minimum="0" Maximum="100"/>
+        <Label x:Name="SoilMoisterLabel" Text="Auto Watering : " FontSize="Medium"/>
+             <Slider x:Name="SoilmoisterSlider" ValueChanged="SoilmoisterSlider_ValueChanged" MaximumTrackColor="Red" MinimumTrackColor="Green" Minimum="0" Maximum="100"/>
         <Button x:Name="Watering" Text="Water plants" Clicked="Watering_Clicked"/>
         <StackLayout Orientation="Horizontal">
             <Label Text="Fans :" FontSize="Medium"/>
