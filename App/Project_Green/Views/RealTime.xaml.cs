@@ -38,7 +38,7 @@ namespace Project_Green.Views
             {
                 try
                 {
-                    i++;
+
                     FillData();
                     Test.Text = "Verbonden met Arduino";
                     return true; // return true to repeat counting, false to stop timer
