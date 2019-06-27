@@ -52,7 +52,7 @@ namespace Project_Green.Views
             float TempSliderValue = Convert.ToSingle(TempratureSlider.Value);
             float SoilmoisterValue = Convert.ToSingle(SoilmoisterSlider.Value);
             // DatabaseManager.Instance.UpdateGreenhouse(greenhouse.Greenhouse_ID, Namechanger.Text, x , TempSliderValue , HumiSliderValue);
-            DatabaseManager.Instance.UpdateGreenhouse(greenhouse.Greenhouse_ID, Namechanger.Text, x);
+            //DatabaseManager.Instance.UpdateGreenhouse(greenhouse.Greenhouse_ID, Namechanger.Text, x);
         }
         private void Fixbar()
         {
