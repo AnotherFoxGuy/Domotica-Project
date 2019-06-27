@@ -1,19 +1,14 @@
 #include "DataStorage.h"
-#include "DHT_imp.h"
 #include "DateTime.h"
 
 File sensorDB;
 
+extern float REST_Temperature;
+extern float REST_Humidity;
+
 void DataStorageSetup()
 {
-  Serial.begin(9600);
-  Serial.print("Initializing SD card...");
 
-  if (!SD.begin(4))
-  {
-    Serial.println("initialization failed!");
-  }
-  Serial.println("initialization done.");
 }
 
 void DataStorageloop()
