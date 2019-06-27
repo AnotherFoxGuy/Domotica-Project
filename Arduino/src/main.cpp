@@ -16,8 +16,6 @@
 #include "FileServe.h"
 #include "DateTime.h"
 
-RTC_DS1307 RTC;
-
 // Variables
 int pins[] = {5, 6, 7};
 
@@ -35,8 +33,9 @@ aREST rest = aREST();
 
 void DHTloop();
 DHT dht;
-int REST_Temperature;
-int REST_Humidity;
+
+int REST_Temperature = 550;
+int REST_Humidity = 14;
 
 Ticker DHTTimer(DHTloop, 2000);
 Ticker DataStorageTimer(DataStorageloop, 300000, 0, MILLIS);
@@ -58,13 +57,13 @@ void setup()
         Serial.println("initialization done.");
     }
 
+    setupDateTime();
+
     // Give name & ID to the device (ID should be 6 characters long)
     char message[19] = "Bloemkool_BoilerV3";
     rest.set_name(message);
     char did[6] = "62153";
     rest.set_id(did);
-
-    setupDateTime();
 
     // Start the Ethernet connection and the server
     // if no dhcp, use default ip

@@ -46,8 +46,8 @@ namespace Project_Green.Views
         }
         public void FillData()
         {
-            LiveTemprature.Text = $"Temprature : {rest.Temperature().Return_value.ToString()}";
-            LiveHumidity.Text = $"Humidity : {rest.Humidity().Return_value.ToString()} ";
+            LiveTemprature.Text = $"Temprature : {rest.Temperature().Temperature.ToString()}";
+            LiveHumidity.Text = $"Humidity : {rest.Humidity().Humidity.ToString()} ";
             LiveLightIntensity.Text = $"Light intesety : {rest.Analog(1).Return_value.ToString()} " ;
             LiveWaterLevel.Text = $"Water Level : {rest.Analog(2).Return_value.ToString()}";
             LiveSoilMoister.Text = $"Soil Moister : {rest.Analog(3).Return_value.ToString()}";

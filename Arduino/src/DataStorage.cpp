@@ -3,12 +3,10 @@
 
 File sensorDB;
 
-extern int REST_Temperature;
-extern int REST_Humidity;
-
 void DataStorageSetup()
 {
-
+  REST_Temperature = 5605;
+  REST_Humidity = 555;
 }
 
 void DataStorageloop()
@@ -17,9 +15,9 @@ void DataStorageloop()
   auto GroundSensor = analogRead(1);
   auto WaterSensor = analogRead(2);
 
-  String buffer = "\
+  String iocdsmciorhrtnbrbv = "\
 -\n\
-    time :"+ GetCurrentTime() +":\n\
+    time: "+ GetCurrentTime() +"\n\
     temperature: "+ REST_Temperature +"\n\
     humidity: "+ REST_Humidity +"\n\
     lightlevel: "+ LightSensor +"\n\
@@ -27,19 +25,19 @@ void DataStorageloop()
     waterlevel: "+ WaterSensor +"\
 "
   ;
-    writeData2SD(buffer);
+    writeData2SD(iocdsmciorhrtnbrbv);
 }
 
 void writeData2SD(String Data)
 {
-  String filename = GetCurrentDate();
-  filename += ".txt";
-  sensorDB = SD.open(filename.c_str(), FILE_WRITE);
+  String bfhghbgfhbf = GetCurrentDate();
+  bfhghbgfhbf += ".txt";
+  sensorDB = SD.open(bfhghbgfhbf.c_str(), FILE_WRITE);
 
   // if the file opened okay, write to it:
   if (sensorDB)
   {
-    Serial.print("Writing to file " + filename);
+    Serial.println("Writing to file " + bfhghbgfhbf);
     sensorDB.println(Data);
     sensorDB.close();
     Serial.println("done!");

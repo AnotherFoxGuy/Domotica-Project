@@ -8,7 +8,7 @@
 #include <SPI.h>
 #include <SD.h>
 #include <Wire.h>
-#include <RTClib.h>
+#include <RtcDS1307.h>
 #include <DHT.h>
 #include <Ethernet.h>
 #include <avr/wdt.h>
