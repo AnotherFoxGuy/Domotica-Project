@@ -12,7 +12,6 @@ namespace Project_Green
     {
         readonly SQLiteConnection Connection;
         public string CurrentIP;
-        
 
         public List<Greenhouse> GetGreenhouses()
         {

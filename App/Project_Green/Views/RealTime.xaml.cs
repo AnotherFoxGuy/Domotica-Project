@@ -14,10 +14,13 @@ namespace Project_Green.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RealTime : ContentPage
-    {
-        int i;
-        ArdunoRestClient rest = new ArdunoRestClient {};
+    {  
         Greenhouse greenhouse;
+        ArdunoRestClient rest = new ArdunoRestClient {};
+        /// <summary>
+        /// RealTime Constructor
+        /// </summary>
+        /// <param name="greenhouse"></param>
         public RealTime(Greenhouse greenhouse)
         {
             InitializeComponent();
@@ -25,6 +28,9 @@ namespace Project_Green.Views
             SetTimer();
 
         }
+        /// <summary>
+        /// sets a timer for every 10 seconds get the data from the arduino
+        /// </summary>
         private void SetTimer()
         {
             Test.Text = "Timer Started";
@@ -44,6 +50,9 @@ namespace Project_Green.Views
                 }
             });
         }
+        /// <summary>
+        /// fill the data
+        /// </summary>
         public void FillData()
         {
             LiveTemprature.Text = $"Temprature : {rest.Temperature().Return_value.ToString()}";
