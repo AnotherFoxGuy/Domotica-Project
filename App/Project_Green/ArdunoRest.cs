@@ -71,23 +71,23 @@ namespace ArdunoRest
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<Success> LedAsync(int @params, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
-        /// <returns>Success</returns>
+        /// <returns>temperature</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        Success Temperature();
+        Temperature Temperature();
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Success</returns>
+        /// <returns>temperature</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Success> TemperatureAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Temperature> TemperatureAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
-        /// <returns>Success</returns>
+        /// <returns>humidity</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        Success Humidity();
+        Humidity Humidity();
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Success</returns>
+        /// <returns>humidity</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<Success> HumidityAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Humidity> HumidityAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
     }
     
@@ -565,17 +565,17 @@ namespace ArdunoRest
             }
         }
     
-        /// <returns>Success</returns>
+        /// <returns>temperature</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public Success Temperature()
+        public Temperature Temperature()
         {
             return System.Threading.Tasks.Task.Run(async () => await TemperatureAsync(System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Success</returns>
+        /// <returns>temperature</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Success> TemperatureAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Temperature> TemperatureAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/temperature");
@@ -608,7 +608,7 @@ namespace ArdunoRest
                         var status_ = ((int)response_.StatusCode).ToString();
                         if (status_ == "200") 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Success>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Temperature>(response_, headers_).ConfigureAwait(false);
                             return objectResponse_.Object;
                         }
                         else
@@ -618,7 +618,7 @@ namespace ArdunoRest
                             throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
             
-                        return default(Success);
+                        return default(Temperature);
                     }
                     finally
                     {
@@ -634,17 +634,17 @@ namespace ArdunoRest
             }
         }
     
-        /// <returns>Success</returns>
+        /// <returns>humidity</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public Success Humidity()
+        public Humidity Humidity()
         {
             return System.Threading.Tasks.Task.Run(async () => await HumidityAsync(System.Threading.CancellationToken.None)).GetAwaiter().GetResult();
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Success</returns>
+        /// <returns>humidity</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Success> HumidityAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Humidity> HumidityAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/humidity");
@@ -677,7 +677,7 @@ namespace ArdunoRest
                         var status_ = ((int)response_.StatusCode).ToString();
                         if (status_ == "200") 
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Success>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<Humidity>(response_, headers_).ConfigureAwait(false);
                             return objectResponse_.Object;
                         }
                         else
@@ -687,7 +687,7 @@ namespace ArdunoRest
                             throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
             
-                        return default(Success);
+                        return default(Humidity);
                     }
                     finally
                     {
@@ -843,6 +843,54 @@ namespace ArdunoRest
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.20.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class ID 
     {
+        /// <summary>The device ID.</summary>
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Id { get; set; }
+    
+        /// <summary>The device name.</summary>
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Name { get; set; }
+    
+        /// <summary>The hardware it is runing on.</summary>
+        [Newtonsoft.Json.JsonProperty("hardware", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Hardware { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("connected", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? Connected { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.20.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class Temperature 
+    {
+        [Newtonsoft.Json.JsonProperty("temperature", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Temperature1 { get; set; }
+    
+        /// <summary>The device ID.</summary>
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Id { get; set; }
+    
+        /// <summary>The device name.</summary>
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Name { get; set; }
+    
+        /// <summary>The hardware it is runing on.</summary>
+        [Newtonsoft.Json.JsonProperty("hardware", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Hardware { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("connected", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? Connected { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.20.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class Humidity 
+    {
+        [Newtonsoft.Json.JsonProperty("humidity", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Humidity1 { get; set; }
+    
         /// <summary>The device ID.</summary>
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? Id { get; set; }
