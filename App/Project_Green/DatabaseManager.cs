@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using SQLite;
@@ -11,6 +11,8 @@ namespace Project_Green
     public class DatabaseManager
     {
         readonly SQLiteConnection Connection;
+        public string CurrentIP;
+        
 
         public List<Greenhouse> GetGreenhouses()
         {

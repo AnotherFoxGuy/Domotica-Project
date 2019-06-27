@@ -88,5 +88,10 @@ namespace Project_Green.Views
         {
 
         }
+
+        private async void LiveData_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new RealTime(selectedGreenhouse));
+        }
     }
 }
