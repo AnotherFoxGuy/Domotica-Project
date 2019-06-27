@@ -3,8 +3,8 @@
 
 File sensorDB;
 
-extern float REST_Temperature;
-extern float REST_Humidity;
+extern int REST_Temperature;
+extern int REST_Humidity;
 
 void DataStorageSetup()
 {
@@ -32,12 +32,14 @@ void DataStorageloop()
 
 void writeData2SD(String Data)
 {
-  sensorDB = SD.open(GetCurrentDate().c_str(), FILE_WRITE);
+  String filename = GetCurrentDate();
+  filename += ".txt";
+  sensorDB = SD.open(filename.c_str(), FILE_WRITE);
 
   // if the file opened okay, write to it:
   if (sensorDB)
   {
-    Serial.print("Writing to file...");
+    Serial.print("Writing to file " + filename);
     sensorDB.println(Data);
     sensorDB.close();
     Serial.println("done!");

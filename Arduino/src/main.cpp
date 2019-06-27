@@ -14,6 +14,7 @@
 // headers
 #include "DataStorage.h"
 #include "FileServe.h"
+#include "DateTime.h"
 
 RTC_DS1307 RTC;
 
@@ -34,8 +35,8 @@ aREST rest = aREST();
 
 void DHTloop();
 DHT dht;
-float REST_Temperature;
-float REST_Humidity;
+int REST_Temperature;
+int REST_Humidity;
 
 Ticker DHTTimer(DHTloop, 2000);
 Ticker DataStorageTimer(DataStorageloop, 300000, 0, MILLIS);
@@ -63,6 +64,8 @@ void setup()
     char did[6] = "62153";
     rest.set_id(did);
 
+    setupDateTime();
+
     // Start the Ethernet connection and the server
     // if no dhcp, use default ip
     if (EthernetClass::begin(mac) == 0)
@@ -83,6 +86,7 @@ void setup()
 
     DataStorageSetup();
     DataStorageTimer.start();
+    DataStorageloop();
 
     // Start watchdog
     wdt_enable(WDTO_4S);
