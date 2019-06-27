@@ -27,9 +27,9 @@ namespace Project_Green.Views
 
         public void fillCharts(string timeTable, int dateWeekMonth)
         {
-            HumidityChart.Chart = chartData.GetChartDataBy(timeTable, dateWeekMonth, "Humidity", selectedGreenhouse.Greenhouse_ID);
-            TempratureChart.Chart = chartData.GetChartDataBy(timeTable, dateWeekMonth, "Temperature", selectedGreenhouse.Greenhouse_ID);
-            MoisterChart.Chart = chartData.GetChartDataBy(timeTable, dateWeekMonth, "Moisture", selectedGreenhouse.Greenhouse_ID);
+            //HumidityChart.Chart = chartData.GetChartDataBy(timeTable, dateWeekMonth, "Humidity", selectedGreenhouse.Greenhouse_ID);
+            //TempratureChart.Chart = chartData.GetChartDataBy(timeTable, dateWeekMonth, "Temperature", selectedGreenhouse.Greenhouse_ID);
+            //MoisterChart.Chart = chartData.GetChartDataBy(timeTable, dateWeekMonth, "Moisture", selectedGreenhouse.Greenhouse_ID);
         }
 
         private async void Settings_Clicked(object sender, EventArgs e)

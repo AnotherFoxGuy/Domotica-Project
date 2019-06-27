@@ -165,7 +165,7 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="C:\Users\Dante Klijn\Pictures\save.png">
+    <AndroidResource Include="..\Project_Green\Images\save.png">
       <Link>Resources\drawable\save.png</Link>
     </AndroidResource>
   </ItemGroup>
