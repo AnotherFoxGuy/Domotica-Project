@@ -19,7 +19,6 @@ namespace Project_Green
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, true);
             GreenhouseList.ItemsSource = IPScanner.Instance.GetGreenhouses();
-            GreenhouseList.ItemsSource = DatabaseManager.Instance.GetGreenhouses(); // haal deze weg in uit in eind product
         }
         /// <summary>
         /// Scans for greenhouses 
@@ -38,6 +37,8 @@ namespace Project_Green
         private void GreenhouseList_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             var SelectedGreenhouse = e.Item as Greenhouse;
+            DatabaseManager.Instance.greenhouse = SelectedGreenhouse;
+            DatabaseManager.Instance.YamlDeserializer();
             var cp = new ChartPage(SelectedGreenhouse);
             Navigation.PushAsync(cp);
         }

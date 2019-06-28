@@ -13,10 +13,8 @@ namespace Project_Green.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingsPage : ContentPage
-    {
-        Greenhouse greenhouse;
-        ArdunoRestClient rest = new ArdunoRestClient {};
-
+    {        
+        ArdunoRestClient rest = new ArdunoRestClient { };
         /// <summary>
         /// SettingsPage Constructor
         /// </summary>
@@ -24,9 +22,8 @@ namespace Project_Green.Views
         public SettingsPage(Greenhouse greenhouse)
         {    
             InitializeComponent();
-            this.greenhouse = greenhouse;
-            UseSettings(); 
-            //pak image van database van deze arduino 
+            DatabaseManager.Instance.greenhouse = greenhouse;
+            UseSettings();
         }
         /// <summary>
         /// Get Settings from current arduino's
@@ -34,8 +31,8 @@ namespace Project_Green.Views
         public void UseSettings()
         {
             ImagePicker.ItemsSource = new List<string> { "GreenHouse1", "GreenHouse2", "GreenHouse3", "GreenHouse4", "GreenHouse5", "GreenhouseDefault" };
-            Imagedisplay.Source = greenhouse.Greenhouse_Image;
-            Namechanger.Text = greenhouse.Greenhouse_Name;
+            Imagedisplay.Source = DatabaseManager.Instance.greenhouse.Greenhouse_Image;
+            Namechanger.Text = DatabaseManager.Instance.greenhouse.Greenhouse_Name;
             //TempratureSlider = greenhouse.Greenhouse_TempSlider; heb data base voor nodig 
             //HumiditySlider = greenhouse.Greenhouse_HumiSlider;
             Fixbar();
@@ -47,7 +44,7 @@ namespace Project_Green.Views
         /// <param name="e"></param>
         private void TempratureSlider_ValueChanged(object sender, ValueChangedEventArgs e)
         {
-            TempratureLable.Text = $"Trigger fans on Temprature : {Convert.ToSingle(TempratureSlider.Value).ToString()} ";
+            TempratureLabel.Text = $"Trigger fans on Temprature : {Convert.ToSingle(TempratureSlider.Value).ToString()} ";
         }
         /// <summary>
         /// triggers when the SoilmoisterSlider changes
@@ -56,7 +53,7 @@ namespace Project_Green.Views
         /// <param name="e"></param>
         private void SoilmoisterSlider_ValueChanged(object sender, ValueChangedEventArgs e)
         {
-            SoilMoisterLable.Text = $"Trigger fans on Temprature : {Convert.ToSingle(SoilmoisterSlider.Value).ToString()} ";
+            SoilMoisterLabel.Text = $"Trigger fans on Temprature : {Convert.ToSingle(SoilmoisterSlider.Value).ToString()} ";
         }
         /// <summary>
         /// wanneer je de picker veranderd laat hij dat plaatje zien
@@ -77,8 +74,7 @@ namespace Project_Green.Views
             string x = $"/Images/{ImagePicker.SelectedItem}.png";
             float TempSliderValue = Convert.ToSingle(TempratureSlider.Value);
             float SoilmoisterValue = Convert.ToSingle(SoilmoisterSlider.Value);
-            // DatabaseManager.Instance.UpdateGreenhouse(greenhouse.Greenhouse_ID, Namechanger.Text, x , TempSliderValue , HumiSliderValue);
-            //DatabaseManager.Instance.UpdateGreenhouse(greenhouse.Greenhouse_ID, Namechanger.Text, x);
+            DatabaseManager.Instance.UpdateGreenhouse(Namechanger.Text, x , TempSliderValue , SoilmoisterValue);
         }
         /// <summary>
         ///  Makes sure that the picker is equal to the image
@@ -87,7 +83,7 @@ namespace Project_Green.Views
         {
             for (int i = 0; i < ImagePicker.ItemsSource.Count; i++)
             {
-                if (greenhouse.Greenhouse_Image.ToString().Contains(i.ToString()))
+                if (DatabaseManager.Instance.greenhouse.Greenhouse_Image.ToString().Contains(i.ToString()))
                 {
                     ImagePicker.SelectedItem = ImagePicker.ItemsSource[i - 1];
                     break;
@@ -106,15 +102,12 @@ namespace Project_Green.Views
         /// <param name="e"></param>
         private void FanToggle_Toggled(object sender, ToggledEventArgs e)
         {
-            if(FanToggle.IsToggled == false)
-            {
+            if (FanToggle.IsToggled == false)
                 rest.DigitalGet(2, 0);
-            }
             else
-            {
                 rest.DigitalGet(2, 1);
-            }
         }
+        
         /// <summary>
         ///  gives 1 second of water  
         /// </summary>
@@ -126,7 +119,5 @@ namespace Project_Green.Views
             Thread.Sleep(1000);
             rest.DigitalGet(5, 0);
         }
-
-
     }
 }
