@@ -11,18 +11,29 @@ namespace Project_Green
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {  
+        /// <summary>
+        /// Constructor of MainPage
+        /// </summary>
         public MainPage()
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, true);
             GreenhouseList.ItemsSource = IPScanner.Instance.GetGreenhouses();
         }
-
+        /// <summary>
+        /// Scans for greenhouses 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ScanGreenhouses(object sender, EventArgs e)
         {
             GreenhouseList.ItemsSource = IPScanner.Instance.GetGreenhouses();
         }
-
+        /// <summary>
+        /// When Greenhouse is selected Go to settings
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GreenhouseList_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             var SelectedGreenhouse = e.Item as Greenhouse;
@@ -31,11 +42,13 @@ namespace Project_Green
             var cp = new ChartPage(SelectedGreenhouse);
             Navigation.PushAsync(cp);
         }
+        /// <summary>
+        /// When you come back to the page scan for green houses 
+        /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();
             GreenhouseList.ItemsSource = IPScanner.Instance.GetGreenhouses();
-            GreenhouseList.ItemsSource = DatabaseManager.Instance.GetGreenhouses(); //haal deze weg in eind product 
         }
     }
 }

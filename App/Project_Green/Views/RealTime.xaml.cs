@@ -17,7 +17,11 @@ namespace Project_Green.Views
     {
         readonly ArdunoRestClient rest;
         readonly Greenhouse greenhouse;
-
+        
+        /// <summary>
+        /// RealTime Constructor
+        /// </summary>
+        /// <param name="greenhouse"></param>
         public RealTime(Greenhouse greenhouse)
         {
             InitializeComponent();
@@ -26,6 +30,9 @@ namespace Project_Green.Views
             SetTimer();
 
         }
+        /// <summary>
+        /// sets a timer for every 10 seconds get the data from the arduino
+        /// </summary>
         private void SetTimer()
         {
             Test.Text = "Timer Started";
@@ -38,6 +45,7 @@ namespace Project_Green.Views
                     LiveLightIntensity.Text = $"Light intesety : {rest.Analog(0).Return_value.ToString()} ";
                     LiveWaterLevel.Text = $"Water Level : {rest.Analog(1).Return_value.ToString()}";
                     LiveSoilMoister.Text = $"Soil Moister : {rest.Analog(2).Return_value.ToString()}";
+
                     Test.Text = "Verbonden met Arduino";
                     return true; // return true to repeat counting, false to stop timer
                 }
@@ -49,5 +57,4 @@ namespace Project_Green.Views
             });
         }
     }
-
 }

@@ -16,6 +16,10 @@ namespace Project_Green.Views
     {
         ChartData chartData = new ChartData();
         Greenhouse selectedGreenhouse;
+        /// <summary>
+        /// Constructor of ChartPage
+        /// </summary>
+        /// <param name="greenhouse"> Object of Greenhouse</param>
         public ChartPage(Greenhouse greenhouse)
         {
             InitializeComponent();
@@ -25,23 +29,40 @@ namespace Project_Green.Views
             ChartMonthName.ItemsSource = new List<string> { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "Noveber", "December" };
         }
 
+        /// <summary>
+        /// Fills the Charts
+        /// </summary>
+        /// <param name="timeTable"> Gives the Selected Time window (Day,Week,Month,Year)</param>
+        /// <param name="dateWeekMonth">Gives the Selected Month</param>
         public void fillCharts(string timeTable, int dateWeekMonth)
         {
             //HumidityChart.Chart = chartData.GetChartDataBy(timeTable, dateWeekMonth, "Humidity", selectedGreenhouse.Greenhouse_ID);
             //TempratureChart.Chart = chartData.GetChartDataBy(timeTable, dateWeekMonth, "Temperature", selectedGreenhouse.Greenhouse_ID);
             //MoisterChart.Chart = chartData.GetChartDataBy(timeTable, dateWeekMonth, "Moisture", selectedGreenhouse.Greenhouse_ID);
         }
-
+        /// <summary>
+        /// Go to Settings page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void Settings_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new SettingsPage(selectedGreenhouse));
         }
-
+        /// <summary>
+        /// Go to the MainPage
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void Home_Clicked(object sender, EventArgs e)
         {
             await Navigation.PopAsync();
         }
-
+        /// <summary>
+        /// Checks what Timewindow you want 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChartTimeTable_SelectedIndexChanged(object sender, EventArgs e)
         {
             Picker picker = sender as Picker;
@@ -73,7 +94,11 @@ namespace Project_Green.Views
                     break;
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChartDatePicker_DateSelected(object sender, DateChangedEventArgs e)
         {
             testdate.Text = e.NewDate.ToShortDateString().Replace("-", string.Empty); //28-6-2019 => 2862019
@@ -88,7 +113,11 @@ namespace Project_Green.Views
         {
 
         }
-
+        /// <summary>
+        /// Go To Live Data 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void LiveData_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new RealTime(selectedGreenhouse));
