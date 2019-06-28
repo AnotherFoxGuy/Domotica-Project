@@ -53,7 +53,7 @@ namespace Project_Green.Views
         /// <param name="e"></param>
         private void SoilmoisterSlider_ValueChanged(object sender, ValueChangedEventArgs e)
         {
-            SoilMoisterLable.Text = $"Trigger fans on Temprature : {Convert.ToSingle(SoilmoisterSlider.Value).ToString()} ";
+            SoilMoisterLabel.Text = $"Trigger fans on Temprature : {Convert.ToSingle(SoilmoisterSlider.Value).ToString()} ";
         }
         /// <summary>
         /// wanneer je de picker veranderd laat hij dat plaatje zien
