@@ -119,10 +119,5 @@ namespace Project_Green.Views
             Thread.Sleep(1000);
             rest.DigitalGet(5, 0);
         }
-
-        private void SoilmoisterSlider_ValueChanged(object sender, ValueChangedEventArgs e)
-        {
-            SoilMoisterLabel.Text = $"Trigger fans on Temprature : {Convert.ToSingle(SoilmoisterSlider.Value).ToString()}";
-        }
     }
 }
